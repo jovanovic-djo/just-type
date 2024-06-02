@@ -3,12 +3,12 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse("home page")
+    return render(request, 'typing_speed_test/home.html')
 
 def type(request):
-    return HttpResponse("Type here")
+    return render(request, 'typing_speed_test/type.html')
 
 def result(request):
-    return HttpResponse("This is result page")
+    return render(request, 'typing_speed_test/result.html')
 
 
