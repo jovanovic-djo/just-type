@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Typing Speed Test</title>
-</head>
+<html>
+    <head>
+        <title>Typing Speed Test</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
 <body>
+    <h1>Welcome to the Typing Test</h1>
     
+        <form method="POST" action="{% url 'type' %}">
+            {% csrf_token %}
+            <div>
+                <div class="wrapper">
+                    <div class="language-choice" id="language">
+                        <input type="radio" id="eng200" name="language" checked="checked" />
+                        <label for="eng200" id="eng200">English</label>
+    
+                        <input type="radio" id="eng1k" name="language" />
+                        <label for="eng1k" id="eng1k">English</label>
+    
+                        <input type="radio" id="ser" name="language" />
+                          <label for="ser" id="ser">Serbian</label>
+                    </div>
+                </div>
+                <div class="word-choice" id="words">
+                    <input type="radio" id="10" name="words" checked="checked" />
+                    <label for="10" id="10">10</label>
+                    
+                    <input type="radio" id="25" name="words" />
+                    <label for="25" id="25">25</label>
+
+                    <input type="radio" id="50" name="words" />
+                    <label for="50" id="50">50</label>
+                </div>  
+                <button class="start-test" type="submit" id="start-test">Start Test</button>  
+        </form>
+    </div>
 </body>
 </html>
