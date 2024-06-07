@@ -1,0 +1,104 @@
+/* ================General================ */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+/* ================Home page================ */
+
+.wrapper {
+    border-radius: 25px;
+    border: 3px solid #b6ac25;
+}
+
+.language-choice label,
+.language-choice input {
+    border-radius: 25px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    width: 100px;
+    height: 35px;
+    border: 3px solid #b6ac25;
+    padding: 0;
+    cursor: pointer;
+    margin-bottom: 5%;
+}
+
+.language-choice input[type="radio"] {
+  display: none;
+}
+
+.language-choice label:hover {
+  background: #DDD;
+}
+
+.language-choice input[type="radio"]:checked + label {
+  background: yellow;
+}
+
+.word-choice label,
+.word-choice input {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    width: 100px;
+    height: 50px;
+    border: 2px solid #CCC;
+    padding: 0;
+    cursor: pointer;
+    margin-bottom: 5%;
+}
+
+.word-choice input[type="radio"] {
+    display: none;
+}
+  
+.word-choice label:hover {
+    background: #DDD;
+}
+  
+.word-choice input[type="radio"]:checked + label {
+    background: rgb(161, 20, 209);
+}
+
+
+.start-test {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================Type page================ */
+
+
+.text-area{
+    width: 450px;
+    height: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 2px solid #a01313;
+    text-align: center;
+}

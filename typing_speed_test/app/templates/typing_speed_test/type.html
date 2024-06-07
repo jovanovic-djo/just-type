@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typing Speed Test</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    
+    <h1>Typing Test</h1>
+    <div class="type-window" id="type-window">
+        <div class="text-area" id="text-area">
+            {% for word in words %}
+            {{ word }}
+            {% endfor %}
+        </div>
+
+    </div>
 </body>
 </html>
