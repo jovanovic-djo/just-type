@@ -1,35 +1,22 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-import json
-from random import randint
+from .utils import load_words
+import random
 
 
 def home(request):
     return render(request, 'typing_speed_test/home.html')
 
 def type(request):
-    language = request.POST['language']
-    words = request.POST['words']
+    if request.method == 'POST':
+        language = request.POST.get('language')
+        word_count = int(request.POST.get('words'))
 
-    match language:
-        case "eng200":
-            json_data = open('/words/english200.json')
-            data = json.load(json_data)
-            json_data.close()
-        case "eng1k":
-            json_data = open('/words/english1k.json')
-            data = json.load(json_data)
-            json_data.close()
-        case "ser":
-            json_data = open('/words/serbian.json')
-            data = json.load(json_data)
-            json_data.close()
-    
-    match words:
-        case "10":
-            questions = data["words"]
-            random_index = randint(0, 9)
+        words = load_words(language)
+        random.shuffle(words)
 
+        selected_words = words[:word_count]
+
+        return render(request, 'typing_speed_test/type.html', {'words': selected_words})
     return render(request, 'typing_speed_test/type.html')
 
 
