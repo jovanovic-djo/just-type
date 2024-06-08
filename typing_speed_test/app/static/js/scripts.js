@@ -59,4 +59,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
             resultModal.style.display = "none";
         }
     }
-});
+}); 
