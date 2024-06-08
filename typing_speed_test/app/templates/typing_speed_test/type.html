@@ -6,16 +6,21 @@
     <title>Typing Speed Test</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
 </head>
 <body>
     <h1>Typing Test</h1>
-    <div class="type-window" id="type-window">
-        <div class="text-area" id="text-area">
-            {% for word in words %}
-            {{ word }}
-            {% endfor %}
+    <div id="words">{{ words|join:" " }}</div>
+    <div id="typedWords"></div>
+    <input type="text" id="typingInput" autofocus />
+    <div id="timer">Time: 0 seconds</div>
+    
+    <!-- The Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="resultText"></p>
         </div>
-
     </div>
 </body>
 </html>
