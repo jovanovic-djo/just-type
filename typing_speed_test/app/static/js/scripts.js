@@ -6,12 +6,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const timerDiv = document.getElementById('timer');
     const resultModal = document.getElementById('resultModal');
     const resultText = document.getElementById('resultText');
+    const restartTestButton = document.getElementById('restartTest');
+    const homeButton = document.getElementById('homeButton');
     const closeModal = document.querySelector('.close');
     let startTime = null;
     let timerInterval = null;
 
-    document.addEventListener('keydown', () => {
+    const resetTest = () => {
+        typingInput.value = '';
+        typedWordsDiv.innerHTML = '';
+        startTime = null;
+        clearInterval(timerInterval);
+        resultModal.style.display = 'none';
         typingInput.focus();
+    };
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            resetTest();
+        }
     });
 
     typingInput.addEventListener('input', function() {
@@ -19,16 +33,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
             startTime = new Date();
             timerInterval = setInterval(() => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
-                timerDiv.textContent = `Time: ${elapsed} seconds`;
             }, 1000);
         }
 
         const typed = typingInput.value;
+        let correctChars = 0;
         let html = '';
         for (let i = 0; i < words.length; i++) {
             if (i < typed.length) {
                 if (words[i] === typed[i]) {
                     html += `<span class="correct">${words[i]}</span>`;
+                    correctChars++;
                 } else {
                     html += `<span class="incorrect">${words[i]}</span>`;
                 }
@@ -40,15 +55,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
         typedWordsDiv.innerHTML = html;
 
-        if (typed === words) {
+        if (typed.length >= words.length) {
             clearInterval(timerInterval);
-            const totalTime = (new Date() - startTime) / 1000; // in seconds
+            const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
             const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
-            resultText.innerHTML = `Test completed in ${totalTime.toFixed(2)} seconds<br>CPM: ${cpm}<br>WPM: ${wpm}`;
+            const accuracy = Math.round((correctChars / typed.length) * 100);
+            resultText.innerHTML = `
+                CPM: ${cpm}<br>
+                WPM: ${wpm}<br>
+                Accuracy: ${accuracy}%
+            `;
             resultModal.style.display = "block";
         }
     });
+
+    restartTestButton.onclick = resetTest;
+
+    homeButton.onclick = function() {
+        window.location.href = '/';
+    };
 
     closeModal.onclick = function() {
         resultModal.style.display = "none";
@@ -59,4 +85,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             resultModal.style.display = "none";
         }
     }
-}); 
+
+    typingInput.focus();
+});
