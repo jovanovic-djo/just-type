@@ -53,7 +53,7 @@ form {
 }
 
 .language-choice input[type="radio"]:checked + label {
-  background: yellow;
+  background: rgb(65, 91, 236);
 }
 
 .word-choice label,
@@ -130,4 +130,8 @@ form {
     position: absolute;
     top: -9999px;
     left: -9999px;
+}
+
+.hidden {
+    display: none;
 }

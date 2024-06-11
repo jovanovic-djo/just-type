@@ -3,16 +3,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const words = document.getElementById('words').innerText.trim();
     const typingInput = document.getElementById('typingInput');
     const typedWordsDiv = document.getElementById('typedWords');
-    const timerDiv = document.getElementById('timer');
     const resultModal = document.getElementById('resultModal');
     const resultText = document.getElementById('resultText');
-    const restartTestButton = document.getElementById('restartTest');
+    const restartTestButton = document.getElementById('restartTestButton');
+    const newTestButton = document.getElementById('newTestButton');
     const homeButton = document.getElementById('homeButton');
     const closeModal = document.querySelector('.close');
     let startTime = null;
     let timerInterval = null;
 
-    const resetTest = () => {
+
+    const redirectHome = () => {
+        window.location.href = '/';
+    };
+
+    // TODO
+    const newTest = () => {
+
+    };
+
+    const restartTest = () => {
         typingInput.value = '';
         typedWordsDiv.innerHTML = '';
         startTime = null;
@@ -22,9 +32,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
     };
 
     document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            redirectHome();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' || e.key === '~') {
+            e.preventDefault();
+            newTest();
+            
+        }
+    });
+    
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
             e.preventDefault();
-            resetTest();
+            restartTest();
         }
     });
 
@@ -53,6 +78,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 html += words[i];
             }
         }
+        
         typedWordsDiv.innerHTML = html;
 
         if (typed.length >= words.length) {
@@ -70,7 +96,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    restartTestButton.onclick = resetTest;
+    restartTestButton.onclick = restartTest;
+    newTestButton.onclick = newTest;
+    
 
     homeButton.onclick = function() {
         window.location.href = '/';
