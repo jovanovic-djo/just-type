@@ -17,8 +17,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         window.location.href = '/';
     };
 
-    // TODO
     const newTest = () => {
+        window.location.reload();
 
     };
 
