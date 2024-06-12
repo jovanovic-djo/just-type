@@ -3,8 +3,8 @@ from .utils import load_words
 import random
 
 
-def home(request):
-    return render(request, 'typing_speed_test/home.html')
+def index(request):
+    return render(request, 'typing_speed_test/index.html')
 
 def type(request):
     if request.method == 'POST':

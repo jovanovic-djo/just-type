@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
+        
 
         const typed = typingInput.value;
         let correctChars = 0;
