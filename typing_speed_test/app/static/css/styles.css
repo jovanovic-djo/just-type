@@ -3,7 +3,9 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding-top: 30px;
+    padding-left: 10%;
+    padding-right: 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,75 +13,100 @@ body {
 
 h1 {
     font-size: 30px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     align-items: center;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+    width: 70%;
+    margin-top: 5px;
 }
 
 /* ================Home page================ */
 
-.wrapper {
-    border-radius: 25px;
+.wrapper-right {
+    border-radius: 50px;
     border: 3px solid #b6ac25;
+    margin: 2%;
+    padding: 1%;
+    width: fit-content;
+    margin-left: auto; 
+    margin-right: 0;
+    
+}
+.wrapper-left {
+    border-radius: 50px;
+    border: 3px solid #b6ac25;
+    margin: 2%;
+    padding: 1%;
+    width: fit-content;
+    margin-left: 0; 
+    margin-right: auto;
 }
 
+/* ACCENT CHOICE WRAPPER */
+.sub-wrapper label,
+.sub-wrapper input {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 3px solid #b6ac25;
+    padding: 3px;
+    cursor: pointer;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+.sub-wrapper input[type="radio"] {
+  display: none;
+}
+.sub-wrapper label:hover {
+  background: #DDD;
+}
+.sub-wrapper input[type="radio"]:checked + label {
+  background: rgb(65, 91, 236);
+}
+
+.sub-wrapper {
+    border-radius: 50px;
+    border: 3px solid #b6ac25;
+    margin: 2%;
+    padding: 1%;
+    width: fit-content;
+}
+.switch-wrap {
+    font-size: 14px;
+    display: inline-block;
+    border-radius: 50%;
+    width: 50px;
+    line-height: 25px;
+    text-align: center;
+}
+
+/* LANGUAGE CHOICE WRAPPER */
 .language-choice label,
 .language-choice input {
     border-radius: 25px;
-    text-align: center;
+    text-align: justify;
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    width: 100px;
+    width: 85px;
     height: 35px;
     border: 3px solid #b6ac25;
     padding: 0;
     cursor: pointer;
-    margin-bottom: 5%;
 }
-
 .language-choice input[type="radio"] {
   display: none;
 }
-
 .language-choice label:hover {
   background: #DDD;
 }
-
 .language-choice input[type="radio"]:checked + label {
   background: rgb(65, 91, 236);
-}
-
-.word-choice label,
-.word-choice input {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    width: 100px;
-    height: 50px;
-    border: 2px solid #CCC;
-    padding: 0;
-    cursor: pointer;
-    margin-bottom: 5%;
-}
-
-.word-choice input[type="radio"] {
-    display: none;
-}
-  
-.word-choice label:hover {
-    background: #DDD;
-}
-  
-.word-choice input[type="radio"]:checked + label {
-    background: rgb(161, 20, 209);
 }
 
 
@@ -87,13 +114,14 @@ form {
     text-align: center;
     align-items: center;
     justify-content: center;
+    width: 80px;
 }
 
 /* ================Type page================ */
 
 .correct { color: green; }
 .incorrect { color: red; }
-.next-char { border-bottom: 2px solid blue; }
+.next-char { border-bottom: 5px solid blue; }
 .modal {
     display: none;
     position: fixed;
@@ -136,4 +164,12 @@ form {
     position: absolute;
     top: -9999px;
     left: -9999px;
+}
+
+#typedWords {
+    font-size: 56px;
+}
+
+#words {
+    font-size: 30px;
 }

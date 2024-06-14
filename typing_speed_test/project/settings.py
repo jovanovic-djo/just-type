@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-ypuyb)l2!72$benr@#2msbdo*jj*9ad3_f2oz0*n4v-o^erk5#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -54,17 +54,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "project.urls"
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, "templates"),)
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-                os.path.join(BASE_DIR , 'templates'),
-                os.path.join(BASE_DIR, 'typing_speed_test', 'templates', 'typing_speed_test'),
-                ],
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(
+                BASE_DIR, "typing_speed_test", "templates", "typing_speed_test"
+            ),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,9 +127,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "app/static"),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "app/static"),)
 
 
 # Default primary key field type
