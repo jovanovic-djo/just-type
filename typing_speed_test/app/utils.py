@@ -6,10 +6,11 @@ import random
 def load_words(language, accent, topic, complexity, word_count):
     current_dir = os.path.dirname(os.path.abspath(__file__))
 
-        
+    if language == "lorem":
+        file_path = os.path.join(current_dir, "words", f"{language}.json")
     if topic == "none":
         file_path = os.path.join(current_dir, "words", f"{language}{complexity}.json")
-    elif topic == "numbers" or topic == "quotes":
+    elif topic == "numbers":
         file_path = os.path.join(current_dir, "words", f"{topic}.json")
     else:
         file_path = os.path.join(current_dir, "words", f"{language}{topic}.json")
