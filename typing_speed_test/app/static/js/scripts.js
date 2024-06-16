@@ -117,3 +117,51 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     typingInput.focus();
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const languageChoice = document.getElementById('language-choice');
+    const topicChoice = document.getElementById('topic-choice');
+    const complexityChoice = document.getElementById('complexity-choice');
+    const wordChoice = document.getElementById('word-choice');
+    const accentRadios = document.querySelectorAll('input[name="accent"]');
+    const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
+    const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
+    const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
+
+    function toggleRadios(radios, disabled) {
+        radios.forEach(radio => {
+            radio.disabled = disabled;
+            const label = document.querySelector(`label[for="${radio.id}"]`);
+            if (label) {
+                if (disabled) {
+                    label.classList.add('disabled-section');
+                } else {
+                    label.classList.remove('disabled-section');
+                }
+            }
+        });
+    }
+
+    function handleRadioChange() {
+        const isLoremChecked = document.getElementById('lorem').checked;
+        const isNumbersChecked = document.getElementById('numbers').checked;
+        const isNoneChecked = document.getElementById('none').checked;
+
+        toggleRadios(accentRadios, isLoremChecked);
+        toggleRadios(topicRadios, isLoremChecked);
+        toggleRadios(complexityRadios, isLoremChecked);
+
+        toggleRadios(complexityRadios, isNumbersChecked);
+        toggleRadios(accentRadios, isNumbersChecked);
+        toggleRadios(languageRadios, isNumbersChecked);
+
+        toggleRadios(complexityRadios, !isNoneChecked);
+    }
+
+    languageChoice.addEventListener('change', handleRadioChange);
+    topicChoice.addEventListener('change', handleRadioChange);
+
+    // Initialize the state on page load
+    handleRadioChange();
+});

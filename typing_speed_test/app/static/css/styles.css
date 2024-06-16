@@ -116,6 +116,21 @@ form {
     justify-content: center;
     width: 80px;
 }
+/* Base styles for radio buttons and labels */
+input[type="radio"] + label {
+    cursor: pointer;
+}
+
+/* Disabled radio button styles */
+input[type="radio"]:disabled + label {
+    cursor: not-allowed;
+    color: grey;
+}
+
+/* Selected label within a disabled section */
+.disabled-section input[type="radio"]:checked + label {
+    color: red; /* Change this to the color you want */
+}
 
 /* ================Type page================ */
 
