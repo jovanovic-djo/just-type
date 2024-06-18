@@ -124,10 +124,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const topicChoice = document.getElementById('topic-choice');
     const complexityChoice = document.getElementById('complexity-choice');
     const wordChoice = document.getElementById('word-choice');
-    const accentRadios = document.querySelectorAll('input[name="accent"]');
+    const accentChoice = document.getElementById('accent-choice')
     const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
     const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
     const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
+    const wordRadios = wordChoice.querySelectorAll('input[type="radio"]');
+    const accentRadios = document.querySelectorAll('input[type="radio"]');
 
     function toggleRadios(radios, disabled) {
         radios.forEach(radio => {
@@ -147,6 +149,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const isLoremChecked = document.getElementById('lorem').checked;
         const isNumbersChecked = document.getElementById('numbers').checked;
         const isNoneChecked = document.getElementById('none').checked;
+        const isQuotesChecked = document.getElementById('quotes').checked;
 
         toggleRadios(accentRadios, isLoremChecked);
         toggleRadios(topicRadios, isLoremChecked);
@@ -157,11 +160,12 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleRadios(languageRadios, isNumbersChecked);
 
         toggleRadios(complexityRadios, !isNoneChecked);
+
+        toggleRadios(wordRadios, isQuotesChecked);
     }
 
     languageChoice.addEventListener('change', handleRadioChange);
     topicChoice.addEventListener('change', handleRadioChange);
 
-    // Initialize the state on page load
     handleRadioChange();
 });

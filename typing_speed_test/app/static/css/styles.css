@@ -46,8 +46,8 @@ form {
 }
 
 /* ACCENT CHOICE WRAPPER */
-.sub-wrapper label,
-.sub-wrapper input {
+.accent-choice label,
+.accent-choice input {
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -59,17 +59,17 @@ form {
     align-items: center; 
     justify-content: center;
 }
-.sub-wrapper input[type="radio"] {
+.accent-choice input[type="radio"] {
   display: none;
 }
-.sub-wrapper label:hover {
+.accent-choice label:hover {
   background: #DDD;
 }
-.sub-wrapper input[type="radio"]:checked + label {
+.accent-choice input[type="radio"]:checked + label {
   background: rgb(65, 91, 236);
 }
 
-.sub-wrapper {
+.accent-choice {
     border-radius: 50px;
     border: 3px solid #b6ac25;
     margin: 2%;
