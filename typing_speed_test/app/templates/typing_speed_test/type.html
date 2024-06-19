@@ -10,17 +10,17 @@
 </head>
 <body>
     <h1>Typing Test</h1>
-    <div id="words">{{ words|join:" " }}</div>
-    <div id="typedWords">{{ words|join:" " }}</div>
-    <input type="text" id="typingInput" autofocus />
-    
-    <div id="resultModal" class="modal">
+    <div id="word-display">{{ words|join:" " }}</div>
+    <div id="typed-word-display">{{ words|join:" " }}</div>
+    <input type="text" id="typing-input" autofocus />
+
+    <div id="result-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p id="resultText"></p>
-            <button id="restartTestButton">Restart</button>
-            <button id="homeButton">Home</button>
-            <button id="newTestButton">New Test</button>
+            <p id="result-text"></p>
+            <button id="restart-test-button">Restart</button>
+            <button id="home-button">Home</button>
+            <button id="new-test-button">New Test</button>
         </div>
     </div>
 </body>
