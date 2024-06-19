@@ -132,22 +132,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function handleRadioChange() {
         const isLoremChecked = document.getElementById('language-lorem').checked;
+        const isEnglishChecked = document.getElementById('language-english').checked;
         const isNumbersChecked = document.getElementById('topic-numbers').checked;
         const isNoneChecked = document.getElementById('topic-none').checked;
+        const isAnimalsChecked = document.getElementById('topic-animals').checked;
+        const isFoodChecked = document.getElementById('topic-food').checked;
+        const isObjectsChecked = document.getElementById('topic-objects').checked;
         const isQuotesChecked = document.getElementById('topic-quotes').checked;
-        const isEnglishChecked = document.getElementById('language-english').checked;
 
-        toggleRadios(accentRadios, !isEnglishChecked);
-        toggleRadios(accentRadios, isLoremChecked);
-        toggleRadios(topicRadios, isLoremChecked);
-        toggleRadios(complexityRadios, isLoremChecked);
+        toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
+        toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
 
-        toggleRadios(complexityRadios, isNumbersChecked);
-        toggleRadios(accentRadios, isNumbersChecked);
-        toggleRadios(languageRadios, isNumbersChecked);
+        toggleRadios(topicRadios, isLoremChecked)
 
-        toggleRadios(complexityRadios, !isNoneChecked);
-        toggleRadios(wordRadios, isQuotesChecked);
+        toggleRadios(wordRadios, isQuotesChecked)
+
+        toggleRadios(languageRadios, isNumbersChecked)
     }
 
     languageChoice.addEventListener('change', handleRadioChange);
@@ -156,6 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     wordChoice.addEventListener('change', handleRadioChange);
     accentChoice.addEventListener('change', handleRadioChange);
     
-    handleRadioChange(); // Initial call to set the correct state on page load
+    handleRadioChange();
 });
 
