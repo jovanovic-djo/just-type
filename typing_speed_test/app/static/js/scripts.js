@@ -134,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const isLoremChecked = document.getElementById('language-lorem').checked;
         const isEnglishChecked = document.getElementById('language-english').checked;
         const isNumbersChecked = document.getElementById('topic-numbers').checked;
-        const isNoneChecked = document.getElementById('topic-none').checked;
         const isAnimalsChecked = document.getElementById('topic-animals').checked;
         const isFoodChecked = document.getElementById('topic-food').checked;
         const isObjectsChecked = document.getElementById('topic-objects').checked;
