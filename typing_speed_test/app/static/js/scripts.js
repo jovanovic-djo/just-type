@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         typedWordsDiv.innerHTML = html;
 
-        if (typed.length >= words.length) {
+        if (typed.length == words.length) {
             clearInterval(timerInterval);
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
