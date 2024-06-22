@@ -20,8 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const restartTest = () => {
-        typingInput.value = '';
-        typedWordsDiv.innerHTML = '';
+        typingInput.value = "";
+        typedWordsDiv.innerHTML = words;
         startTime = null;
         clearInterval(timerInterval);
         resultModal.style.display = 'none';
