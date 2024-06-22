@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const words = document.getElementById('word-display').innerText.trim();
     const typingInput = document.getElementById('typing-input');
-    const typedWordsDiv = document.getElementById('typed-word-display');
+    const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     const resultText = document.getElementById('result-text');
     const restartTestButton = document.getElementById('restart-test-button');
