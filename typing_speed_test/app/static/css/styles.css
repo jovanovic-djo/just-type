@@ -194,10 +194,7 @@ input[type="radio"]:disabled + label {
     left: -9999px;
 }
 
-#typed-word-display {
-    font-size: 56px;
-}
 
 #word-display {
-    font-size: 30px;
+    font-size: 56px;
 }
