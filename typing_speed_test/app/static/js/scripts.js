@@ -1,12 +1,56 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const languageChoice = document.getElementById('language-choice');
+    const topicChoice = document.getElementById('topic-choice');
+    const complexityChoice = document.getElementById('complexity-choice');
+    const modeValueChoice = document.getElementById('mode-value-choice');
+    const accentChoice = document.getElementById('accent-choice');
+
+    const accentRadios = accentChoice.querySelectorAll('input[type="radio"]');
+    const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
+    const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
+    const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
+    const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
+
+    function toggleRadios(radioGroup, shouldDisable) {
+        radioGroup.forEach(radio => {
+            radio.disabled = shouldDisable;
+        });
+    }
+
+    function handleRadioChange() {
+        const isLoremChecked = document.getElementById('language-lorem').checked;
+        const isEnglishChecked = document.getElementById('language-english').checked;
+        const isNumbersChecked = document.getElementById('topic-numbers').checked;
+        const isAnimalsChecked = document.getElementById('topic-animals').checked;
+        const isFoodChecked = document.getElementById('topic-food').checked;
+        const isObjectsChecked = document.getElementById('topic-objects').checked;
+        const isQuotesChecked = document.getElementById('topic-quotes').checked;
+
+        toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
+        toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
+
+        toggleRadios(topicRadios, isLoremChecked)
+
+        toggleRadios(modeValueRadios, isQuotesChecked)
+
+        toggleRadios(languageRadios, isNumbersChecked)
+    }
+
+    languageChoice.addEventListener('change', handleRadioChange);
+    topicChoice.addEventListener('change', handleRadioChange);
+    complexityChoice.addEventListener('change', handleRadioChange);
+    modeValueChoice.addEventListener('change', handleRadioChange);
+    accentChoice.addEventListener('change', handleRadioChange);
+    
+    handleRadioChange();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const words = document.getElementById('word-display').innerText.trim();
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     const resultText = document.getElementById('result-text');
-    const restartTestButton = document.getElementById('restart-test-button');
-    const newTestButton = document.getElementById('new-test-button');
-    const homeButton = document.getElementById('home-button');
     const closeModal = document.querySelector('.close');
 
 
@@ -79,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         typedWordsDiv.innerHTML = html;
 
-        if (mode == "count" || typed.length == words.length) {
+        if (typed.length == words.length) {
             clearInterval(timerInterval);
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
@@ -94,10 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    restartTestButton.onclick = restartTest;
-    newTestButton.onclick = newTest;
-
-    homeButton.onclick = redirectHome;
 
     closeModal.onclick = function() {
         resultModal.style.display = "none";
@@ -111,54 +151,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     typingInput.focus();
 });
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const languageChoice = document.getElementById('language-choice');
-    const topicChoice = document.getElementById('topic-choice');
-    const complexityChoice = document.getElementById('complexity-choice');
-    const modeValueChoice = document.getElementById('mode-value-choice');
-    const accentChoice = document.getElementById('accent-choice');
-
-    const accentRadios = accentChoice.querySelectorAll('input[type="radio"]');
-    const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
-    const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
-    const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
-    const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
-
-    
-
-    function toggleRadios(radioGroup, shouldDisable) {
-        radioGroup.forEach(radio => {
-            radio.disabled = shouldDisable;
-        });
-    }
-
-    function handleRadioChange() {
-        const isLoremChecked = document.getElementById('language-lorem').checked;
-        const isEnglishChecked = document.getElementById('language-english').checked;
-        const isNumbersChecked = document.getElementById('topic-numbers').checked;
-        const isAnimalsChecked = document.getElementById('topic-animals').checked;
-        const isFoodChecked = document.getElementById('topic-food').checked;
-        const isObjectsChecked = document.getElementById('topic-objects').checked;
-        const isQuotesChecked = document.getElementById('topic-quotes').checked;
-
-        toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
-        toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
-
-        toggleRadios(topicRadios, isLoremChecked)
-
-        toggleRadios(modeValueRadios, isQuotesChecked)
-
-        toggleRadios(languageRadios, isNumbersChecked)
-    }
-
-    languageChoice.addEventListener('change', handleRadioChange);
-    topicChoice.addEventListener('change', handleRadioChange);
-    complexityChoice.addEventListener('change', handleRadioChange);
-    modeValueChoice.addEventListener('change', handleRadioChange);
-    accentChoice.addEventListener('change', handleRadioChange);
-    
-    handleRadioChange();
-});
-
