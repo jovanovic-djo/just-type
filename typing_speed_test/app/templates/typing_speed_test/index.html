@@ -4,7 +4,6 @@
     <title>Typing Speed Test</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script src="{% static 'js/scripts.js' %}" defer></script>
 </head>
 <body>
     <h1>Welcome to the Typing Test</h1>
@@ -82,24 +81,25 @@
             </div>
         </div>
         <div class="wrapper-right">
-            <div class="word-choice" id="word-choice">
-                <input type="radio" id="words-5" name="words" value="5" checked="checked" />
-                <label for="words-5">5</label>
+            <div class="mode-value-choice" id="mode-value-choice">
+                <input type="radio" id="words-5" name="mode-value" value="5" checked="checked" />
+                <label for="mode-value-5">5</label>
 
-                <input type="radio" id="words-10" name="words" value="10"/>
-                <label for="words-10">10</label>
+                <input type="radio" id="mode-value-10" name="mode-value" value="10"/>
+                <label for="mode-value-10">10</label>
 
-                <input type="radio" id="words-15" name="words" value="15"/>
-                <label for="words-15">15</label>
+                <input type="radio" id="mode-value-15" name="mode-value" value="15"/>
+                <label for="mode-value-15">15</label>
                 
-                <input type="radio" id="words-25" name="words" value="25"/>
-                <label for="words-25">25</label>
+                <input type="radio" id="mode-value-25" name="mode-value" value="25"/>
+                <label for="mode-value-25">25</label>
 
-                <input type="radio" id="words-60" name="words" value="60" />
-                <label for="words-60">60</label>
+                <input type="radio" id="mode-value-60" name="mode-value" value="60" />
+                <label for="mode-value-60">60</label>
             </div>  
         </div>          
         <button class="start-test" type="submit" id="start-test">Start Test</button>  
     </form>
+    <script src="{% static 'js/scripts.js' %}" defer></script>
 </body>
 </html>

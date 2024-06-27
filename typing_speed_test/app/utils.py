@@ -2,7 +2,7 @@ import json
 import os
 import random
 
-def load_words(language, accent, mode, topic, complexity, word_count):
+def load_words(language, accent, mode, topic, complexity, mode_value):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     if language == "lorem":
         file_path = os.path.join(current_dir, "words", f"{language}.json")
@@ -20,9 +20,9 @@ def load_words(language, accent, mode, topic, complexity, word_count):
         if topic == "quotes":
             words = words[:1]
         elif mode == "time":
-            words = words[:word_count * 2]
+            words = words[:mode_value * 2]
         else:
-            words = words[:word_count]
+            words = words[:mode_value]
 
     if accent == "off":
         accent_map = {

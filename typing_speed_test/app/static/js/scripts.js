@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newTestButton = document.getElementById('new-test-button');
     const homeButton = document.getElementById('home-button');
     const closeModal = document.querySelector('.close');
-
-    const mode = document.querySelector('input[name="mode"]:checked').value;
+    
 
     let startTime = null;
     let timerInterval = null;
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-
+        
         const typed = typingInput.value;
         let correctChars = 0;
         let html = '';

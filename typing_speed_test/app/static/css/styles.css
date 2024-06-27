@@ -144,7 +144,9 @@ input[type="radio"]:disabled + label {
 
 .correct { color: green; }
 .incorrect { color: red; }
-.next-char { border-bottom: 5px solid blue; }
+.next-char { 
+    border-bottom: 5px solid blue; 
+}
 
 .modal {
     display: none;
