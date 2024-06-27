@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newTestButton = document.getElementById('new-test-button');
     const homeButton = document.getElementById('home-button');
     const closeModal = document.querySelector('.close');
-    
+
 
     let startTime = null;
     let timerInterval = null;
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         typedWordsDiv.innerHTML = html;
 
-        if (typed.length == words.length) {
+        if (mode == "count" || typed.length == words.length) {
             clearInterval(timerInterval);
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
@@ -117,14 +117,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const languageChoice = document.getElementById('language-choice');
     const topicChoice = document.getElementById('topic-choice');
     const complexityChoice = document.getElementById('complexity-choice');
-    const wordChoice = document.getElementById('word-choice');
+    const modeValueChoice = document.getElementById('mode-value-choice');
     const accentChoice = document.getElementById('accent-choice');
 
     const accentRadios = accentChoice.querySelectorAll('input[type="radio"]');
     const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
     const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
-    const wordRadios = wordChoice.querySelectorAll('input[type="radio"]');
+    const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
     const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
+
+    
 
     function toggleRadios(radioGroup, shouldDisable) {
         radioGroup.forEach(radio => {
@@ -146,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toggleRadios(topicRadios, isLoremChecked)
 
-        toggleRadios(wordRadios, isQuotesChecked)
+        toggleRadios(modeValueRadios, isQuotesChecked)
 
         toggleRadios(languageRadios, isNumbersChecked)
     }
@@ -154,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     languageChoice.addEventListener('change', handleRadioChange);
     topicChoice.addEventListener('change', handleRadioChange);
     complexityChoice.addEventListener('change', handleRadioChange);
-    wordChoice.addEventListener('change', handleRadioChange);
+    modeValueChoice.addEventListener('change', handleRadioChange);
     accentChoice.addEventListener('change', handleRadioChange);
     
     handleRadioChange();
