@@ -7,11 +7,25 @@
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
 <body>
-    <div id="theme-switch" class="theme-switch">
-        <label class="switch">
-            <input type="checkbox" id="theme-toggle">
-            <span class="slider"></span>
-        </label>
+    <div class="header">
+        <div class="social-media">
+            <div class="social-item">
+                <a href="https://www.linkedin.com/in/jovanovicdj/" target="_blank">
+                    <img src="{% static 'img/linkedin.png' %}" alt="LinkedIn Profile"/>
+                </a>
+            </div>
+            <div class="social-item">
+                <a href="https://github.com/jovanovic-djo" target="_blank">
+                    <img src="{% static 'img/github.png' %}" alt="GitHub Profile"/>
+                </a>
+            </div>
+        </div>
+        <div id="theme-switch" class="theme-switch">
+            <label class="switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+        </div>
     </div>
     <h1>Welcome to the Typing Test</h1>
     <form method="POST" action="{% url 'type' %}">

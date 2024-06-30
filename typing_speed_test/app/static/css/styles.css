@@ -54,7 +54,41 @@ form {
     margin-top: 5px;
 }
 
-/* THEME SWITCH */
+/* **************** HEADER **************************************** */
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 95%;
+    padding-left: 2%;
+}
+
+.social-media {
+    display: flex;
+    gap: 20px; 
+}
+
+.social-item a img {
+    width: 26px;
+    height: 26px; 
+    transition: opacity 0.3s ease; 
+}
+
+.social-item a img:hover {
+    opacity: 0.7; 
+}
+.wrapper-right, .wrapper-left {
+    border-radius: 50px;
+    border: 3px solid var(--border-color);
+    margin: 2%;
+    padding: 1%;
+    width: fit-content;
+}
+
 .theme-switch {
     position: absolute;
     top: 10px;
@@ -112,13 +146,6 @@ input:checked + .slider:before {
 }
 
 /* ================Home page================ */
-.wrapper-right, .wrapper-left {
-    border-radius: 50px;
-    border: 3px solid var(--border-color);
-    margin: 2%;
-    padding: 1%;
-    width: fit-content;
-}
 
 .wrapper-right {
     margin-left: auto; 

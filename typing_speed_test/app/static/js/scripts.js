@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
-    const resultText = document.getElementById('result-text');
     const closeModal = document.querySelector('.close');
 
     let startTime = null;
