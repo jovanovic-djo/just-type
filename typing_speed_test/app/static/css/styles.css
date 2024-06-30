@@ -376,7 +376,7 @@ key {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #1e5ca8;
     margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -384,15 +384,8 @@ key {
 }
 
 #typing-input {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
-}
-
-.hidden {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
+    opacity: 0;
+    left:0; right:0; top:0; bottom:0;
 }
 
 #word-display {

@@ -12,7 +12,7 @@
     <div class="type-area" id="type-area">
         <h1>Typing Test</h1>
         <div id="word-display">{{ words|join:" " }}</div>
-        <input type="text" id="typing-input" autofocus />
+        <input autocomplete="off" type="text" id="typing-input" onblur="this.focus()" autofocus/>
     
         <div id="result-modal" class="modal">
             <div class="modal-content">
