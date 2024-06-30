@@ -101,7 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-        
+
+        document.getElementById("test-title").style.transition = "opacity 0.7s ease-in-out";
+        document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
+        document.getElementById("test-title").style.opacity = 0.1;
+        document.getElementById("instruction-container").style.opacity = 0.1;
         const typed = typingInput.value;
         let correctChars = 0;
         let html = '';

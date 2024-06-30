@@ -341,8 +341,9 @@ input[type="radio"]:disabled + label {
     border-bottom: 5px solid blue; 
 }
 
-#test-title h1{
-    font-size: 2px;
+#test-title{
+    font-size: var(--font-size-medium);
+    opacity: 0.8;
 }
 
 .modal {
@@ -413,6 +414,7 @@ input[type="radio"]:disabled + label {
     position: fixed;
     bottom: 0;
     margin-bottom: 4%;
+    opacity: 0.8;
 }
 item {
     margin-left: 3%;
