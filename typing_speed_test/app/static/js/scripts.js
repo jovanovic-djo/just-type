@@ -128,11 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const cpm = Math.round((typed.length / totalTime) * 60);
             const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
             const accuracy = Math.round((correctChars / typed.length) * 100);
-            resultText.innerHTML = `
-                CPM: ${cpm}<br>
-                WPM: ${wpm}<br>
-                Accuracy: ${accuracy}%
-            `;
+            document.getElementById('cpm').innerText = `CPM: ${cpm}`;
+            document.getElementById('wpm').innerText = `WPM: ${wpm}`;
+            document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
             resultModal.style.display = "block";
         }
     });
