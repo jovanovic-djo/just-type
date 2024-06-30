@@ -9,13 +9,15 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>Typing Test</h1>
-    <div id="word-display">{{ words|join:" " }}</div>
-    <input type="text" id="typing-input" autofocus />
-
-    <div id="result-modal" class="modal">
-        <div class="modal-content">
-            <p id="result-text"></p>
+    <div class="type-area" id="type-area">
+        <h1>Typing Test</h1>
+        <div id="word-display">{{ words|join:" " }}</div>
+        <input type="text" id="typing-input" autofocus />
+    
+        <div id="result-modal" class="modal">
+            <div class="modal-content">
+                <p id="result-text"></p>
+            </div>
         </div>
     </div>
     <script src="{% static 'js/scripts.js' %}" defer></script>

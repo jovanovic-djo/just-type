@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultText = document.getElementById('result-text');
     const closeModal = document.querySelector('.close');
 
-
     let startTime = null;
     let timerInterval = null;
 
@@ -149,7 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    typingInput.focus();
+    const focusInput = () => {
+        typingInput.focus();
+    };
+
+    document.addEventListener('click', (e) => {
+        if (!resultModal.contains(e.target) && e.target !== typingInput) {
+            focusInput();
+        }
+    });
+
+    document.addEventListener('keydown', () => {
+        focusInput();
+    });
+
+    focusInput();
+
 });
 
 

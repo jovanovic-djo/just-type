@@ -1,16 +1,18 @@
 /* ================General================ */
 :root {
-    --primary-color: #3498db;
+    --primary-color: #5695bf;
     --secondary-color: #2ecc71;
     --background-color: #f8fcfd;
-    --text-color: #2c3e50;
-    --border-color: #b6ac25;
+    --text-color: #4343e9;
+    --border-color: rgb(182, 172, 37);
     --hover-background: #DDD;
-    --checked-background: rgb(65, 91, 236);
+    --checked-background: rgb(178, 172, 204);
+    --disabled: rgb(155, 147, 39);
 
     --font-family: 'Arial, sans-serif';
     --font-size-base: 16px;
-    --font-size-large: 22px;
+    --font-size-large: 3vw;
+    --font-size-medium: 22px;
     --font-size-small: 12px;
 }
 
@@ -22,6 +24,7 @@
     --border-color: #b6ac25;
     --hover-background: #DDD;
     --checked-background: rgb(65, 91, 236);
+    --disabled: rgb(182, 172, 37);
 }
 
 body {
@@ -36,6 +39,7 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     position: relative;
+    user-select: none;
 }
 
 h1 {
@@ -72,12 +76,11 @@ form {
 
 .slider {
     position: absolute;
-    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: var(--text-color);
     transition: .4s;
 }
 
@@ -88,7 +91,7 @@ form {
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background-color: var(--secondary-color);
     transition: .4s;
 }
 
@@ -136,10 +139,13 @@ input:checked + .slider:before {
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    width: 85px;
-    height: 35px;
+    width: max-content;
+    height: max-content;
     border: 3px solid var(--border-color);
-    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     cursor: pointer;
 }
 
@@ -159,8 +165,9 @@ input:checked + .slider:before {
 .accent-choice label,
 .accent-choice input {
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    font-size: var(--font-size-medium);
+    width: 60px;
+    height: 60px;
     text-align: center;
     border: 3px solid var(--border-color);
     padding: 3px;
@@ -185,8 +192,8 @@ input:checked + .slider:before {
 .accent-choice {
     border-radius: 50px;
     border: 3px solid var(--border-color);
-    margin: 2%;
-    padding: 0.5%;
+    margin: 10px;
+    padding: 5px;
     width: fit-content;
 }
 
@@ -194,7 +201,8 @@ input:checked + .slider:before {
     font-size: 14px;
     display: inline-block;
     border-radius: 50%;
-    width: 50px;
+    height: auto;
+    width: auto;
     line-height: 25px;
     text-align: center;
 }
@@ -225,6 +233,7 @@ input:checked + .slider:before {
 .topic-choice input[type="radio"]:checked + label {
     background: var(--checked-background);
 }
+
 
 /* MODE VALUE CHOICE */
 .mode-value-choice label,
@@ -280,6 +289,16 @@ input:checked + .slider:before {
     background: var(--checked-background);
 }
 
+/* DISABLED */
+input[type="radio"] + label {
+    cursor: pointer;
+}
+
+input[type="radio"]:disabled + label {
+    cursor: not-allowed;
+    color: grey;
+}
+
 /* START BUTTON */
 
 .button-container {
@@ -317,30 +336,23 @@ input:checked + .slider:before {
 
 
 /* BOTTOM INSTRUCTIONS */
-
-.instructions-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.instruction-container {
     width: 100%;
-}
-
-.item {
     text-align: center;
+}
+item {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+key {
+    color: var(--bg-color);
+    background-color: var(--border-color);
+    margin: 0;
+    padding: 4px;
+    border-radius: .1rem;
     display: inline-block;
-    margin-left: 3%;
-    margin-right: 3%;
-}
-
-.item img {
-    width: 35px; 
-    height: auto;
-}
-
-.item p {
-    margin-top: 5px;
-    color: var(--text-color);
-    margin-bottom: 1%;
+    font-size: 1rem;
+    line-height: .7rem;
 }
 
 /* ================Type page================ */
@@ -371,20 +383,6 @@ input:checked + .slider:before {
     width: 80%;
 }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 #typing-input {
     position: absolute;
     top: -9999px;
@@ -399,4 +397,16 @@ input:checked + .slider:before {
 
 #word-display {
     font-size: 56px;
+}
+
+#type-area {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events:none;
+    cursor: no-drop;
+    display: block;
 }
