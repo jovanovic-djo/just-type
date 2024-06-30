@@ -9,7 +9,7 @@
     --checked-background: rgb(178, 172, 204);
     --disabled: rgb(155, 147, 39);
 
-    --font-family: 'Arial, sans-serif';
+    --font-family: monospace;
     --font-size-base: 16px;
     --font-size-large: 3vw;
     --font-size-medium: 22px;
@@ -28,7 +28,7 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding-top: 30px;
     padding-left: 10%;
@@ -339,10 +339,13 @@ input[type="radio"]:disabled + label {
 .instruction-container {
     width: 100%;
     text-align: center;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 4%;
 }
 item {
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 key {
     color: var(--bg-color);
@@ -362,6 +365,10 @@ key {
     border-bottom: 5px solid blue; 
 }
 
+#test-title h1{
+    font-size: 2px;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -377,19 +384,28 @@ key {
 
 .modal-content {
     background-color: #1e5ca8;
-    margin: 5% auto;
+    margin: 12% auto auto auto;
+    opacity: 0.8;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 45%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
 }
+
+#result-text p{
+    color: var(--text-color);
+}
+
 
 #typing-input {
     opacity: 0;
-    left:0; right:0; top:0; bottom:0;
 }
 
 #word-display {
     font-size: 56px;
+    margin-top: 10%;
 }
 
 #type-area {
@@ -402,4 +418,6 @@ key {
     pointer-events:none;
     cursor: no-drop;
     display: block;
+    text-align: center;
+    padding-top: 1%;
 }

@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="type-area" id="type-area">
-        <h1>Typing Test</h1>
+        <h1 id="test-title">...start typing whenever you are ready</h1>
         <div id="word-display">{{ words|join:" " }}</div>
         <input autocomplete="off" type="text" id="typing-input" onblur="this.focus()" autofocus/>
     
@@ -19,6 +19,11 @@
                 <p id="result-text"></p>
             </div>
         </div>
+    </div>
+    <div class="instruction-container">
+        <item><key>tab</key> - restart test</item>
+        <item><key>esc</key> - back to home</item>
+        <item><key>~</key> - new test</item>
     </div>
     <script src="{% static 'js/scripts.js' %}" defer></script>
 </body>
