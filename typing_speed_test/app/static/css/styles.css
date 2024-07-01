@@ -157,37 +157,6 @@ input:checked + .slider:before {
     margin-right: auto;
 }
 
-/* LANGUAGE CHOICE WRAPPER */
-.language-choice label,
-.language-choice input {
-    border-radius: 25px;
-    font-size: var(--font-size-large);
-    text-align: justify;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    width: max-content;
-    height: max-content;
-    border: 3px solid var(--border-color);
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    cursor: pointer;
-}
-
-.language-choice input[type="radio"] {
-    display: none;
-}
-
-.language-choice label:hover {
-    background: var(--hover-background);
-}
-
-.language-choice input[type="radio"]:checked + label {
-    background: var(--checked-background);
-}
-
 /* ACCENT CHOICE WRAPPER */
 .accent-choice label,
 .accent-choice input {
@@ -234,85 +203,31 @@ input:checked + .slider:before {
     text-align: center;
 }
 
-/* TOPIC CHOICE */
-.topic-choice label,
-.topic-choice input {
+/* **** CHOICE ****** */
+.choice label,
+.choice input {
     border-radius: 25px;
+    font-size: var(--font-size-medium);
     text-align: justify;
     align-items: center;
     justify-content: center;
     display: inline-flex;
-    width: 85px;
-    height: 35px;
+    width: max-content;
+    height: max-content;
     border: 3px solid var(--border-color);
-    padding: 0;
+    padding: 5px 10px;
     cursor: pointer;
 }
 
-.topic-choice input[type="radio"] {
+.choice input[type="radio"] {
     display: none;
 }
 
-.topic-choice label:hover {
+.choice label:hover {
     background: var(--hover-background);
 }
 
-.topic-choice input[type="radio"]:checked + label {
-    background: var(--checked-background);
-}
-
-
-/* MODE VALUE CHOICE */
-.mode-value-choice label,
-.mode-value-choice input {
-    border-radius: 25px;
-    text-align: justify;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    width: 35px;
-    height: 35px;
-    border: 3px solid var(--border-color);
-    padding: 0;
-    cursor: pointer;
-}
-
-.mode-value-choice input[type="radio"] {
-    display: none;
-}
-
-.mode-value-choice label:hover {
-    background: var(--hover-background);
-}
-
-.mode-value-choice input[type="radio"]:checked + label {
-    background: var(--checked-background);
-}
-
-/* COMPLEXITY CHOICE WRAPPER */
-.complexity-choice label,
-.complexity-choice input {
-    border-radius: 25px;
-    text-align: justify;
-    align-items: center;
-    justify-content: center;
-    display: inline-flex;
-    width: 85px;
-    height: 35px;
-    border: 3px solid var(--border-color);
-    padding: 0;
-    cursor: pointer;
-}
-
-.complexity-choice input[type="radio"] {
-    display: none;
-}
-
-.complexity-choice label:hover {
-    background: var(--hover-background);
-}
-
-.complexity-choice input[type="radio"]:checked + label {
+.choice input[type="radio"]:checked + label {
     background: var(--checked-background);
 }
 
