@@ -5,7 +5,7 @@
     --background-color: #f8fcfd;
     --text-color: #4343e9;
     --border-color: rgb(182, 172, 37);
-    --hover-background: #DDD;
+    --hover-background: #2585cf;
     --checked-background: rgb(178, 172, 204);
     --disabled: rgb(155, 147, 39);
 
@@ -76,10 +76,11 @@ form {
     width: 26px;
     height: 26px; 
     transition: opacity 0.3s ease; 
+    opacity: 0.4;
 }
 
 .social-item a img:hover {
-    opacity: 0.7; 
+    opacity: 1; 
 }
 .wrapper-right, .wrapper-left {
     border-radius: 50px;
@@ -277,8 +278,13 @@ input[type="radio"]:disabled + label {
 }
 
 /* ================Type page================ */
-.correct { color: green; }
-.incorrect { color: red; }
+.correct { 
+    color: green; 
+}
+.incorrect { 
+    color: red; 
+    border-bottom: 5px solid red;
+}
 .next-char { 
     border-bottom: 5px solid blue; 
 }
@@ -305,9 +311,9 @@ input[type="radio"]:disabled + label {
     background-color: #1e5ca8;
     margin: 12% auto auto auto;
     opacity: 0.8;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #888;
-    width: 45%;
+    width: 30%;
     align-items: center;
     align-self: center;
     align-content: center;
@@ -321,7 +327,6 @@ input[type="radio"]:disabled + label {
 }
 
 #result-text span {
-    margin: 0 10px;
     font-size: var(--font-size-medium);
 }
 
@@ -331,8 +336,11 @@ input[type="radio"]:disabled + label {
 
 #word-display {
     font-size: 56px;
-    margin-top: 10%;
+    margin-top: 5%;
+    overflow: hidden;
+    height: 140px; 
 }
+
 
 #type-area {
     -webkit-touch-callout: none;
