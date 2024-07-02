@@ -338,7 +338,7 @@ input[type="radio"]:disabled + label {
     font-size: 56px;
     margin-top: 5%;
     overflow: hidden;
-    height: 140px; 
+    height: 205px; 
 }
 
 
