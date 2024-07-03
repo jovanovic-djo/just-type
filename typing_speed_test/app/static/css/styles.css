@@ -17,13 +17,13 @@
 }
 
 .theme-dark {
-    --primary-color: #1abc9c;
-    --secondary-color: #1599b7;
-    --background-color: #34495e;
+    --primary-color: #008170;
+    --secondary-color: #005B41;
+    --background-color: #232D3F;
     --text-color: #ecf0f1;
-    --border-color: #b6ac25;
-    --hover-background: #DDD;
-    --checked-background: rgb(65, 91, 236);
+    --border-color: #0F0F0F;
+    --hover-background: #008170;
+    --checked-background: #005B41;
     --disabled: rgb(182, 172, 37);
 }
 
