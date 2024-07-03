@@ -1,13 +1,15 @@
 /* ================General================ */
 :root {
-    --primary-color: #5695bf;
-    --secondary-color: #2ecc71;
-    --background-color: #f8fcfd;
-    --text-color: #4343e9;
-    --border-color: rgb(182, 172, 37);
-    --hover-background: #2585cf;
-    --checked-background: rgb(178, 172, 204);
-    --disabled: rgb(155, 147, 39);
+    --primary-color: #e8d5bc;
+    --secondary-color: #DAC0A3;
+    --background-color: #f1e4d1;
+    --text-color: #102C57;
+    --border-color: #102C57;
+    --hover-background: #EADBC8;
+    --checked-background: #d1b493;
+    --disabled: #9e9ea8;
+    --wrapper: #fbe7d3;
+    --default-button: #f5dbc1;
 
     --font-family: monospace;
     --font-size-base: 16px;
@@ -24,7 +26,9 @@
     --border-color: #0F0F0F;
     --hover-background: #008170;
     --checked-background: #005B41;
-    --disabled: rgb(182, 172, 37);
+    --disabled: #808f87;
+    --wrapper: #1d2534;
+    --default-button: #19202d;
 }
 
 body {
@@ -77,6 +81,7 @@ form {
     height: 26px; 
     transition: opacity 0.3s ease; 
     opacity: 0.4;
+    cursor: crosshair;
 }
 
 .social-item a img:hover {
@@ -117,6 +122,7 @@ form {
     bottom: 0;
     background-color: var(--text-color);
     transition: .4s;
+    cursor: crosshair;
 }
 
 .slider:before {
@@ -151,11 +157,13 @@ input:checked + .slider:before {
 .wrapper-right {
     margin-left: auto; 
     margin-right: 0;
+    background-color: var(--wrapper);
 }
 
 .wrapper-left {
     margin-left: 0; 
     margin-right: auto;
+    background-color: var(--wrapper);
 }
 
 /* ACCENT CHOICE WRAPPER */
@@ -202,6 +210,7 @@ input:checked + .slider:before {
     width: auto;
     line-height: 25px;
     text-align: center;
+    background-color: var(--wrapper);
 }
 
 /* **** CHOICE ****** */
@@ -218,6 +227,7 @@ input:checked + .slider:before {
     border: 3px solid var(--border-color);
     padding: 5px 10px;
     cursor: pointer;
+    background-color: var(--default-button);
 }
 
 .choice input[type="radio"] {
@@ -235,11 +245,13 @@ input:checked + .slider:before {
 /* DISABLED */
 input[type="radio"] + label {
     cursor: pointer;
+    
 }
 
 input[type="radio"]:disabled + label {
     cursor: not-allowed;
-    color: grey;
+    color: var(--primary-color);
+    background-color: var(--disabled);
 }
 
 /* START BUTTON */
@@ -279,14 +291,14 @@ input[type="radio"]:disabled + label {
 
 /* ================Type page================ */
 .correct { 
-    color: green; 
+    color: var(--secondary-color); 
 }
 .incorrect { 
-    color: red; 
-    border-bottom: 5px solid red;
+    color: rgb(119, 8, 8); 
+    border-bottom: 5px solid rgb(119, 8, 8);
 }
 .next-char { 
-    border-bottom: 5px solid blue; 
+    border-bottom: 5px solid var(--border-color); 
 }
 
 #test-title{
@@ -308,11 +320,11 @@ input[type="radio"]:disabled + label {
 }
 
 .modal-content {
-    background-color: #1e5ca8;
+    background-color: var(--hover-background);
     margin: 12% auto auto auto;
     opacity: 0.8;
     padding: 15px;
-    border: 1px solid #888;
+    border: 1px solid var(--disabled);
     width: 30%;
     align-items: center;
     align-self: center;
@@ -371,7 +383,7 @@ item {
     margin-right: 3%;
 }
 key {
-    color: var(--bg-color);
+    color: var(--checked-background);
     background-color: var(--border-color);
     margin: 0;
     padding: 4px;
