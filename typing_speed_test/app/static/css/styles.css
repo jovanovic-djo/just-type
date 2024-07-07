@@ -1,13 +1,16 @@
 /* ================General================ */
 :root {
-    --primary-color: #5695bf;
-    --secondary-color: #2ecc71;
-    --background-color: #f8fcfd;
-    --text-color: #4343e9;
-    --border-color: rgb(182, 172, 37);
-    --hover-background: #2585cf;
-    --checked-background: rgb(178, 172, 204);
-    --disabled: rgb(155, 147, 39);
+    --primary-color: #e8d5bc;
+    --secondary-color: #DAC0A3;
+    --background-color: #f1e4d1;
+    --text-color: #102C57;
+    --border-color: #102C57;
+    --hover-background: #EADBC8;
+    --checked-background: #d1b493;
+    --disabled: #eee1ce;
+    --disabled-text: #6e6e6e;
+    --wrapper: #fbe7d3;
+    --default-button: #f5dbc1;
 
     --font-family: monospace;
     --font-size-base: 16px;
@@ -17,14 +20,17 @@
 }
 
 .theme-dark {
-    --primary-color: #1abc9c;
-    --secondary-color: #1599b7;
-    --background-color: #34495e;
+    --primary-color: #008170;
+    --secondary-color: #005B41;
+    --background-color: #232D3F;
     --text-color: #ecf0f1;
-    --border-color: #b6ac25;
-    --hover-background: #DDD;
-    --checked-background: rgb(65, 91, 236);
-    --disabled: rgb(182, 172, 37);
+    --border-color: #0F0F0F;
+    --hover-background: #008170;
+    --checked-background: #005B41;
+    --disabled: #313e56;
+    --disabled-text: #808f87;
+    --wrapper: #1d2534;
+    --default-button: #19202d;
 }
 
 body {
@@ -52,6 +58,7 @@ h1 {
 form {
     width: 70%;
     margin-top: 5px;
+    flex: 1;
 }
 
 /* **************** HEADER **************************************** */
@@ -77,6 +84,7 @@ form {
     height: 26px; 
     transition: opacity 0.3s ease; 
     opacity: 0.4;
+    cursor: pointer;
 }
 
 .social-item a img:hover {
@@ -117,6 +125,7 @@ form {
     bottom: 0;
     background-color: var(--text-color);
     transition: .4s;
+    cursor: pointer;
 }
 
 .slider:before {
@@ -151,11 +160,13 @@ input:checked + .slider:before {
 .wrapper-right {
     margin-left: auto; 
     margin-right: 0;
+    background-color: var(--wrapper);
 }
 
 .wrapper-left {
     margin-left: 0; 
     margin-right: auto;
+    background-color: var(--wrapper);
 }
 
 /* ACCENT CHOICE WRAPPER */
@@ -180,6 +191,7 @@ input:checked + .slider:before {
 
 .accent-choice label:hover {
     background: var(--hover-background);
+    transition: 0.2s;
 }
 
 .accent-choice input[type="radio"]:checked + label {
@@ -202,6 +214,7 @@ input:checked + .slider:before {
     width: auto;
     line-height: 25px;
     text-align: center;
+    background-color: var(--wrapper);
 }
 
 /* **** CHOICE ****** */
@@ -218,6 +231,7 @@ input:checked + .slider:before {
     border: 3px solid var(--border-color);
     padding: 5px 10px;
     cursor: pointer;
+    background-color: var(--default-button);
 }
 
 .choice input[type="radio"] {
@@ -226,6 +240,7 @@ input:checked + .slider:before {
 
 .choice label:hover {
     background: var(--hover-background);
+    transition: 0.2s;
 }
 
 .choice input[type="radio"]:checked + label {
@@ -239,9 +254,15 @@ input[type="radio"] + label {
 
 input[type="radio"]:disabled + label {
     cursor: not-allowed;
-    color: grey;
+    color: var(--disabled-text);
+    background-color: var(--disabled);
 }
 
+input[type="radio"]:checked:disabled + label {
+    cursor: not-allowed;
+    color: var(--disabled-text);
+    background-color: var(--disabled);
+}
 /* START BUTTON */
 
 .button-container {
@@ -255,7 +276,7 @@ input[type="radio"]:disabled + label {
 .start-test {
     background-color: var(--primary-color);
     color: var(--text-color);
-    border: 2px solid var(--primary-color);
+    border: 2px solid var(--border-color);
     border-radius: 25px;
     padding: 10px 20px;
     font-size: 16px;
@@ -279,14 +300,14 @@ input[type="radio"]:disabled + label {
 
 /* ================Type page================ */
 .correct { 
-    color: green; 
+    color: var(--secondary-color); 
 }
 .incorrect { 
-    color: red; 
-    border-bottom: 5px solid red;
+    color: rgb(119, 8, 8); 
+    border-bottom: 5px solid rgb(119, 8, 8);
 }
 .next-char { 
-    border-bottom: 5px solid blue; 
+    border-bottom: 5px solid var(--border-color); 
 }
 
 #test-title{
@@ -308,11 +329,11 @@ input[type="radio"]:disabled + label {
 }
 
 .modal-content {
-    background-color: #1e5ca8;
+    background-color: var(--hover-background);
     margin: 12% auto auto auto;
     opacity: 0.8;
     padding: 15px;
-    border: 1px solid #888;
+    border: 1px solid var(--disabled);
     width: 30%;
     align-items: center;
     align-self: center;
@@ -361,17 +382,19 @@ input[type="radio"]:disabled + label {
 .instruction-container {
     width: 100%;
     text-align: center;
-    position: fixed;
-    bottom: 0;
-    margin-bottom: 4%;
     opacity: 0.8;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-top: 20%;
 }
 item {
     margin-left: 3%;
     margin-right: 3%;
 }
 key {
-    color: var(--bg-color);
+    color: var(--checked-background);
     background-color: var(--border-color);
     margin: 0;
     padding: 4px;
