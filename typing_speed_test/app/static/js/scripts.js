@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function handleRadioChange() {
         const isLoremChecked = document.getElementById('language-lorem').checked;
         const isEnglishChecked = document.getElementById('language-english').checked;
+        const isSerbianChecked = document.getElementById('language-serbian').checked;
+        const isGermanChecked = document.getElementById('language-german').checked;  
         const isNumbersChecked = document.getElementById('topic-numbers').checked;
         const isAnimalsChecked = document.getElementById('topic-animals').checked;
         const isFoodChecked = document.getElementById('topic-food').checked;
@@ -40,6 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleRadios(modeValueRadios, isQuotesChecked)
 
         toggleRadios(languageRadios, isNumbersChecked)
+
+        enableRadios(modeValueRadios, isLoremChecked || isEnglishChecked || isSerbianChecked || isGermanChecked)
     }
 
     languageChoice.addEventListener('change', handleRadioChange);

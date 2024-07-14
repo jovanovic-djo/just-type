@@ -11,7 +11,7 @@ def type(request):
         language = request.POST.get("language")
         accent = request.POST.get("accent")
         topic = request.POST.get("topic")
-        mode_value = int(request.POST.get("mode-value"))
+        mode_value = request.POST.get("mode-value")
         complexity = request.POST.get("complexity")
 
         words = load_words(language, accent, topic, complexity, mode_value)
