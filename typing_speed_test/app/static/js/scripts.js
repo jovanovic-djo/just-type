@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
             radio.disabled = shouldDisable;
         });
     }
+    
+    function enableRadios(radioGroup, shouldEnable) {
+        radioGroup.forEach(radio => {
+            radio.disabled = !shouldEnable;
+        });
+    }
 
     function handleRadioChange() {
         const isLoremChecked = document.getElementById('language-lorem').checked;
@@ -34,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleRadios(modeValueRadios, isQuotesChecked)
 
         toggleRadios(languageRadios, isNumbersChecked)
+
+        toggleRadios(modeValueRadios, isLoremChecked)
     }
 
     languageChoice.addEventListener('change', handleRadioChange);
