@@ -20,10 +20,8 @@ def load_words(language, accent, topic, complexity, mode_value):
         random.shuffle(words)
         if topic == "quotes":
             words = words[:1]
-        elif language == "lorem":
-            words = words[:mode_value]
         else:
-            words = words[:int(mode_value)]
+            words = words[:mode_value]
 
     if accent == "off":
         accent_map = {

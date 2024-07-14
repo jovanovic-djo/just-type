@@ -128,7 +128,7 @@ form {
     right: 0;
     bottom: 0;
     background-color: var(--text-color);
-    cursor: pointer;
+    transition: .4s;
 }
 
 .slider:before {
@@ -302,7 +302,7 @@ input[type="radio"]:checked:disabled + label {
     border-bottom: 5px solid rgb(119, 8, 8);
 }
 .next-char { 
-    border-bottom: 5px solid var(--text-color); 
+    border-bottom: 5px solid blue; 
 }
 
 #test-title{
@@ -378,11 +378,6 @@ input[type="radio"]:checked:disabled + label {
     width: 100%;
     text-align: center;
     opacity: 0.8;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    margin-top: 2%;
 }
 item {
     margin-left: 3%;
