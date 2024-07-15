@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toggleRadios(topicRadios, isLoremChecked)
 
-        toggleRadios(modeValueRadios, isQuotesChecked)
-
         toggleRadios(languageRadios, isNumbersChecked)
 
         enableRadios(modeValueRadios, isLoremChecked || isEnglishChecked || isSerbianChecked || isGermanChecked)
+
+        toggleRadios(modeValueRadios, isQuotesChecked)
     }
 
     languageChoice.addEventListener('change', handleRadioChange);

@@ -19,7 +19,9 @@ def load_words(language, accent, topic, complexity, mode_value):
         words = data.get("words", [])
         random.shuffle(words)
         if topic == "quotes":
-            words = words[:1]     
+            words = words[:1]    
+        elif language == "lorem":
+            words = words[:mode_value]
         else:
             words = words[:int(mode_value)]
 
