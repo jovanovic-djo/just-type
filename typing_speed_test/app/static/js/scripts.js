@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     const closeModal = document.querySelector('.close');
+    
 
     let startTime = null;
     let timerInterval = null;

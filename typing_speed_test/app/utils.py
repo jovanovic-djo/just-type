@@ -21,7 +21,7 @@ def load_words(language, accent, topic, complexity, mode_value):
         if topic == "quotes":
             words = words[:1]    
         elif language == "lorem":
-            words = words[:mode_value]
+            words = words[:int(mode_value)]
         else:
             words = words[:int(mode_value)]
 
