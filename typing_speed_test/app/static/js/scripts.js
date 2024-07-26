@@ -198,3 +198,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const complexityChoice = document.getElementById('complexity-choice');
+
+    if (complexityChoice) {
+        const radios = complexityChoice.querySelectorAll('input[type="radio"]');
+        
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (radio.checked) {
+                    localStorage.setItem('complexity', radio.value);
+                }
+            });
+        });
+    }
+
+    const wordDisplay = document.getElementById('word-display');
+    
+    if (wordDisplay) {
+        const complexity = localStorage.getItem('complexity');
+        
+        if (complexity === 'insane') {
+            wordDisplay.style.fontSize = '28px';
+        } else if (complexity === 'high'){
+            wordDisplay.style.fontSize = '38px';
+        } else {
+            wordDisplay.style.fontSize = '48px';
+        }
+    }
+});
