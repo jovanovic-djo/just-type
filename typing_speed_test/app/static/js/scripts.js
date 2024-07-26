@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const complexity = localStorage.getItem('complexity');
         
         if (complexity === 'insane') {
-            wordDisplay.style.fontSize = '28px';
+            wordDisplay.style.fontSize = '32px';
         } else if (complexity === 'high'){
             wordDisplay.style.fontSize = '38px';
         } else {

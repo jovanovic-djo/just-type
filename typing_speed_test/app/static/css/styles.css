@@ -44,10 +44,6 @@ html {
     background: transparent; 
 }
 
-::-webkit-scrollbar-thumb {
-    background: #FF0000;
-}
-
 body {
     font-family: var(--font-family);
     margin: 0;
@@ -69,6 +65,35 @@ title {
     margin-bottom: 30px;
     align-items: center;
 }
+
+.instruction-container {
+    width: 100%;
+    text-align: center;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 80px;
+}
+
+key {
+    color: var(--checked-background);
+    background-color: var(--border-color);
+    margin: 0;
+    padding: 4px;
+    border-radius: .1rem;
+    font-size: 1rem;
+    line-height: .7rem;
+}
+
+item {
+    margin-left: 3%;
+    margin-right: 3%;
+    position: relative;
+    display: inline-block;
+    align-self: flex-end;
+}
+
 
 /* **************** HEADER **************************************** */
 .header {
@@ -159,6 +184,12 @@ input:checked + .slider:before {
 
 /* ================Home page================ */
 
+form {
+    width: 100%;
+    margin-top: 5px;
+    flex: 1;
+}
+
 .wrapper-right {
     margin-left: auto; 
     margin-right: 0;
@@ -174,9 +205,6 @@ input:checked + .slider:before {
 .accent-choice label,
 .accent-choice input {
     border-radius: 50%;
-    font-size: var(--font-size-medium);
-    width: 60px;
-    height: 60px;
     text-align: center;
     border: 3px solid var(--border-color);
     padding: 3px;
@@ -222,7 +250,6 @@ input:checked + .slider:before {
 .choice label,
 .choice input {
     border-radius: 25px;
-    font-size: var(--font-size-medium);
     text-align: justify;
     align-items: center;
     justify-content: center;
@@ -277,8 +304,6 @@ input[type="radio"]:checked:disabled + label {
     color: var(--text-color);
     border: 2px solid var(--border-color);
     border-radius: 25px;
-    padding: 10px 20px;
-    font-size: 16px;
     cursor: pointer;
     width: auto;
     text-align: center;
@@ -294,275 +319,6 @@ input[type="radio"]:checked:disabled + label {
 .start-test:focus {
     outline: none;
     box-shadow: 0 0 5px var(--primary-color);
-}
-
-/* ############################# Media Queries #######################*/
-
-/* Small devices*/
-@media (max-width: 650px) {
-    .accent-choice label,
-    .accent-choice input {
-        width: 40px;
-        height: 40px;
-        font-size: var(--font-size-small);
-    }
-
-    .choice label,
-    .choice input {
-        font-size: var(--font-size-small);
-        padding: 3px 6px;
-    }
-
-    .start-test {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-    form {
-        width: 100%;
-        margin-top: 5px;
-        flex: 1;
-    }
-    
-    key {
-        color: var(--checked-background);
-        background-color: var(--border-color);
-        margin: 0;
-        padding: 4px;
-        border-radius: .1rem;
-        display: inline-block;
-        font-size: .8rem;
-        line-height: .7rem;
-    }
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    
-    .modal-content {
-        background-color: var(--hover-background);
-        margin: 150px auto auto auto;
-        opacity: 0.8;
-        padding: 15px;
-        border: 1px solid var(--disabled);
-        width: 70%;
-        align-items: center;
-        align-self: center;
-        align-content: center;
-        font-size: 12px;
-    }
-
-    #result-text span {
-        font-size: 15px;
-    }
-
-
-}
-
-/* Medium devices */
-@media (min-width: 650px) and (max-width: 800px) {
-    .accent-choice label,
-    .accent-choice input {
-        width: 50px;
-        height: 50px;
-        font-size: 16px;
-    }
-
-    .choice label,
-    .choice input {
-        font-size: 16px;
-        padding: 4px 8px;
-    }
-
-    .start-test {
-        font-size: 15px;
-        padding: 9px 18px;
-    }
-
-    form {
-        width: 100%;
-        margin-top: 5px;
-        flex: 1;
-    }
-
-    key {
-        color: var(--checked-background);
-        background-color: var(--border-color);
-        margin: 0;
-        padding: 4px;
-        border-radius: .1rem;
-        display: inline-block;
-        font-size: 1rem;
-        line-height: .7rem;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    
-    .modal-content {
-        background-color: var(--hover-background);
-        margin: 150px auto auto auto;
-        opacity: 0.8;
-        padding: 15px;
-        border: 1px solid var(--disabled);
-        width: 60%;
-        align-items: center;
-        align-self: center;
-        align-content: center;
-    }
-
-    #result-text span {
-        font-size: 18px;
-    }
-
-}
-/* Medium-Large */
-@media (min-width: 800px) and (max-width: 1200px) {
-    .accent-choice label,
-    .accent-choice input {
-        width: 60px;
-        height: 60px;
-        font-size: 19px;
-    }
-
-    .choice label,
-    .choice input {
-        font-size: 19px;
-        padding: 5px 10px;
-    }
-
-    .start-test {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
-
-    form {
-        width: 90%;
-        margin-top: 5px;
-        flex: 1;
-    }
-
-    key {
-        color: var(--checked-background);
-        background-color: var(--border-color);
-        margin: 0;
-        padding: 4px;
-        border-radius: .1rem;
-        font-size: 1rem;
-        line-height: .7rem;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    
-    .modal-content {
-        background-color: var(--hover-background);
-        margin: 150px auto auto auto;
-        opacity: 0.8;
-        padding: 15px;
-        border: 1px solid var(--disabled);
-        width: 50%;
-        align-items: center;
-        align-self: center;
-        align-content: center;
-    }
-
-    #result-text span {
-        font-size: 20px;
-    }
-}
-
-/* Large devices */
-@media (min-width: 1200px) {
-    .accent-choice label,
-    .accent-choice input {
-        width: 60px;
-        height: 60px;
-        font-size: var(--font-size-medium);
-    }
-
-    .choice label,
-    .choice input {
-        font-size: var(--font-size-medium);
-        padding: 5px 10px;
-    }
-
-    .start-test {
-        font-size: 16px;
-        padding: 10px 20px;
-    }
-
-    form {
-        width: 70%;
-        margin-top: 5px;
-        flex: 1;
-    }
-    
-    key {
-        color: var(--checked-background);
-        background-color: var(--border-color);
-        margin: 0;
-        padding: 4px;
-        border-radius: .1rem;
-        font-size: 1rem;
-        line-height: .7rem;
-    }
-
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-        padding-top: 60px;
-    }
-    
-    .modal-content {
-        background-color: var(--hover-background);
-        margin: 150px auto auto auto;
-        opacity: 0.8;
-        padding: 15px;
-        border: 1px solid var(--disabled);
-        width: 40%;
-        align-items: center;
-        align-self: center;
-        align-content: center;
-    }
-
-    #result-text span {
-        font-size: var(--font-size-medium);
-    } 
 }
 
 /* ================Type page================ */
@@ -601,35 +357,168 @@ input[type="radio"]:checked:disabled + label {
 }
 
 #type-area {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
-    pointer-events:none;
+    pointer-events: none;
     cursor: no-drop;
     display: block;
     text-align: center;
     padding-top: 1%;
 }
 
-.instruction-container {
-    width: 100%;
-    text-align: center;
-    opacity: 0.8;
+.modal {
+    display: none;
     position: fixed;
-    bottom: 0;
+    z-index: 1;
     left: 0;
-    margin-bottom: 80px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
 }
 
-item {
-    margin-left: 3%;
-    margin-right: 3%;
-    position: relative;
-    display: inline-block;
-    align-self: flex-end;
+.modal-content {
+    background-color: var(--hover-background);
+    margin: 150px auto auto auto;
+    opacity: 0.8;
+    padding: 15px;
+    border: 1px solid var(--disabled);
+    width: 40%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
 }
 
+/* ############################# Media Queries #######################*/
+
+/* Small devices*/
+@media (max-width: 650px) {
+    .accent-choice label,
+    .accent-choice input {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-small);
+    }
+
+    .choice label,
+    .choice input {
+        font-size: var(--font-size-small);
+        padding: 3px 6px;
+    }
+
+    .start-test {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+    
+    key {
+        font-size: .6rem;
+    }
+    
+    .modal-content {
+        width: 70%;
+        font-size: 12px;
+    }
+
+    #result-text span {
+        font-size: 15px;
+    }
+
+
+}
+
+/* Medium devices */
+@media (min-width: 650px) and (max-width: 800px) {
+    .accent-choice label,
+    .accent-choice input {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .choice label,
+    .choice input {
+        font-size: 16px;
+        padding: 4px 8px;
+    }
+
+    .start-test {
+        font-size: 15px;
+        padding: 9px 18px;
+    }
+    
+    .modal-content {
+        width: 60%;
+    }
+
+    #result-text span {
+        font-size: 18px;
+    }
+}
+/* Medium-Large */
+@media (min-width: 800px) and (max-width: 1200px) {
+    .accent-choice label,
+    .accent-choice input {
+        width: 60px;
+        height: 60px;
+        font-size: 19px;
+    }
+
+    .choice label,
+    .choice input {
+        font-size: 19px;
+        padding: 5px 10px;
+    }
+
+    .start-test {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    form {
+        width: 90%;
+    }
+    
+    .modal-content {
+        width: 50%;
+    }
+
+    #result-text span {
+        font-size: 20px;
+    }
+}
+
+/* Large devices */
+@media (min-width: 1200px) {
+    .accent-choice label,
+    .accent-choice input {
+        width: 60px;
+        height: 60px;
+        font-size: var(--font-size-medium);
+    }
+
+    .choice label,
+    .choice input {
+        font-size: var(--font-size-medium);
+        padding: 5px 10px;
+    }
+
+    .start-test {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    form {
+        width: 70%;
+    }
+    
+    .modal-content {
+        width: 40%;
+    }
+
+    #result-text span {
+        font-size: var(--font-size-medium);
+    } 
+}
 
