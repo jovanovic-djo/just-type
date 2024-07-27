@@ -2,6 +2,7 @@ import json
 import os
 import random
 
+
 def accent_trim(accent, words):
     if accent == "off":
         accent_map = {
@@ -24,14 +25,15 @@ def accent_trim(accent, words):
             "ß": "ss",
             "ẞ": "SS",
         }
-        
+
         words = ["".join(accent_map.get(char, char) for char in word) for word in words]
-    
+
     return words
 
 
-def load_words(language, accent, topic, complexity, mode_value):
+def select_file_path(language, topic, complexity):
     current_dir = os.path.dirname(os.path.abspath(__file__))
+
     if language == "lorem":
         file_path = os.path.join(current_dir, "words", f"{language}.json")
     elif topic == "none":
@@ -40,6 +42,12 @@ def load_words(language, accent, topic, complexity, mode_value):
         file_path = os.path.join(current_dir, "words", f"{topic}.json")
     else:
         file_path = os.path.join(current_dir, "words", f"{language}{topic}.json")
+
+    return file_path
+
+
+def load_words(language, accent, topic, complexity, mode_value):
+    file_path = select_file_path(language, topic, complexity)
 
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)
