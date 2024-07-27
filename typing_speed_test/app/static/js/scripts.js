@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
     const languageChoice = document.getElementById('language-choice');
     const topicChoice = document.getElementById('topic-choice');
     const complexityChoice = document.getElementById('complexity-choice');
@@ -28,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isEnglishChecked = document.getElementById('language-english').checked;
         const isSerbianChecked = document.getElementById('language-serbian').checked;
         const isGermanChecked = document.getElementById('language-german').checked;  
+
         const isNumbersChecked = document.getElementById('topic-numbers').checked;
         const isAnimalsChecked = document.getElementById('topic-animals').checked;
         const isFoodChecked = document.getElementById('topic-food').checked;
@@ -35,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const isQuotesChecked = document.getElementById('topic-quotes').checked;
 
         toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
+
         toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
 
         toggleRadios(topicRadios, isLoremChecked)
@@ -117,9 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
+
         const typed = typingInput.value;
         let correctChars = 0;
         let html = '';
+
         for (let i = 0; i < words.length; i++) {
             if (i < typed.length) {
                 if (words[i] === typed[i]) {
@@ -139,13 +144,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (typed.length == words.length) {
             clearInterval(timerInterval);
+
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
             const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
             const accuracy = Math.round((correctChars / typed.length) * 100);
+
             document.getElementById('cpm').innerText = `CPM: ${cpm}`;
             document.getElementById('wpm').innerText = `WPM: ${wpm}`;
             document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
+            
             resultModal.style.display = "block";
         }
     });
@@ -224,8 +232,8 @@ document.addEventListener('DOMContentLoaded', function() {
             wordDisplay.style.fontSize = '32px';
         } else if (complexity === 'high'){
             wordDisplay.style.fontSize = '38px';
-        } else {
-            wordDisplay.style.fontSize = '48px';
         }
     }
+
+    localStorage.clear();
 });
