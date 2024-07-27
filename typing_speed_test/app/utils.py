@@ -2,27 +2,7 @@ import json
 import os
 import random
 
-
-def load_words(language, accent, topic, complexity, mode_value):
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    if language == "lorem":
-        file_path = os.path.join(current_dir, "words", f"{language}.json")
-    elif topic == "none":
-        file_path = os.path.join(current_dir, "words", f"{language}{complexity}.json")
-    elif topic == "numbers":
-        file_path = os.path.join(current_dir, "words", f"{topic}.json")
-    else:
-        file_path = os.path.join(current_dir, "words", f"{language}{topic}.json")
-
-    with open(file_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-        words = data.get("words", [])
-        random.shuffle(words)
-        if topic == "quotes":
-            words = words[:1]
-        else:
-            words = words[: int(mode_value)]
-
+def accent_trim(accent, words):
     if accent == "off":
         accent_map = {
             "ć": "c",
@@ -44,6 +24,32 @@ def load_words(language, accent, topic, complexity, mode_value):
             "ß": "ss",
             "ẞ": "SS",
         }
+        
         words = ["".join(accent_map.get(char, char) for char in word) for word in words]
+    
+    return words
+
+
+def load_words(language, accent, topic, complexity, mode_value):
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    if language == "lorem":
+        file_path = os.path.join(current_dir, "words", f"{language}.json")
+    elif topic == "none":
+        file_path = os.path.join(current_dir, "words", f"{language}{complexity}.json")
+    elif topic == "numbers":
+        file_path = os.path.join(current_dir, "words", f"{topic}.json")
+    else:
+        file_path = os.path.join(current_dir, "words", f"{language}{topic}.json")
+
+    with open(file_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        words = data.get("words", [])
+        random.shuffle(words)
+        if topic == "quotes":
+            words = words[:1]
+        else:
+            words = words[: int(mode_value)]
+
+    words = accent_trim(accent, words)
 
     return words
