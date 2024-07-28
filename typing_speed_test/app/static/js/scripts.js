@@ -28,7 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const isLoremChecked = document.getElementById('language-lorem').checked;
         const isEnglishChecked = document.getElementById('language-english').checked;
         const isSerbianChecked = document.getElementById('language-serbian').checked;
-        const isGermanChecked = document.getElementById('language-german').checked;  
+        const isGermanChecked = document.getElementById('language-german').checked;
+        const isSpanishChecked = document.getElementById('language-spanish').checked;
+        const isFrenchChecked = document.getElementById('language-french').checked;
 
         const isNumbersChecked = document.getElementById('topic-numbers').checked;
         const isAnimalsChecked = document.getElementById('topic-animals').checked;
@@ -44,10 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toggleRadios(languageRadios, isNumbersChecked)
 
+        enableRadios(modeValueRadios, isEnglishChecked || isSerbianChecked || isGermanChecked || isSpanishChecked || isFrenchChecked)
+
         toggleRadios(modeValueRadios, isQuotesChecked)
-
-        enableRadios(modeValueRadios, isLoremChecked || isEnglishChecked || isSerbianChecked || isGermanChecked)
-
     }
 
     languageChoice.addEventListener('change', handleRadioChange);
@@ -233,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (complexity === 'high'){
             wordDisplay.style.fontSize = '38px';
         }
-        
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 localStorage.clear();
