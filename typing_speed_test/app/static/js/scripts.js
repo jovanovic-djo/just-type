@@ -233,7 +233,12 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (complexity === 'high'){
             wordDisplay.style.fontSize = '38px';
         }
-    }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                localStorage.clear();
+            }
+        });
 
-    localStorage.clear();
+    } 
 });

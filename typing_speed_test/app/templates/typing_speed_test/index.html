@@ -3,7 +3,7 @@
     <head>
         {% load static %}
         <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
-        <title>Typing Speed Test</title>
+        <title>justType</title>
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     </head>
 <body>
@@ -27,7 +27,7 @@
             </label>
         </div>
     </div>
-    <h1>Welcome to the Typing Test</h1>
+    <h1>just.Type</h1>
     <form method="POST" action="{% url 'type' %}">
         {% csrf_token %}
         <div class="wrapper-left">

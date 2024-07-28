@@ -55,12 +55,10 @@ body {
     user-select: none;
 }
 
-title {
-    font-size: var(--font-size-medium);
-    margin-top: 30px;
-    margin-bottom: 30px;
+h1 {
+    font-size: 32px;
     align-items: center;
-}
+} 
 
 .instruction-container {
     width: 100%;
