@@ -42,13 +42,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
 
-        toggleRadios(topicRadios, isLoremChecked)
+        toggleRadios(topicRadios, isLoremChecked);
 
-        toggleRadios(languageRadios, isNumbersChecked)
+        toggleRadios(languageRadios, isNumbersChecked);
 
-        enableRadios(modeValueRadios, isEnglishChecked || isSerbianChecked || isGermanChecked || isSpanishChecked || isFrenchChecked)
+        enableRadios(modeValueRadios, isEnglishChecked || isSerbianChecked || isGermanChecked || isSpanishChecked || isFrenchChecked);
 
-        toggleRadios(modeValueRadios, isQuotesChecked)
+        if (isLoremChecked) {
+            enableRadios(modeValueRadios, true);
+        } else {
+            toggleRadios(modeValueRadios, isQuotesChecked);
+        }
     }
 
     languageChoice.addEventListener('change', handleRadioChange);

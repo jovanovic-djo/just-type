@@ -110,8 +110,8 @@ item {
 .social-item a img {
     width: 26px;
     height: 26px; 
-    transition: opacity 0.3s ease; 
-    opacity: 0.4;
+    transition: opacity 0.4s ease; 
+    opacity: 0.1;
     cursor: pointer;
 }
 
