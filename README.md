@@ -1,6 +1,7 @@
 Basic touch typing web app for practicing, written in Python for backend and vanilla Javascript for frontend (and html & css of course).
 Database for leaderboard can be added, besides more complexity in features. 
-Features: 
+
+# Features: 
 - Multiple lanugages (lorem ipsum included)
 - Accent trim (for smoother test)
 - Different topics (numbers - if you are into accounting, animals, objects and food for language learners, and also, quotes)
