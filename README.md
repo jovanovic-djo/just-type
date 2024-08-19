@@ -1,4 +1,6 @@
-#### Basic typing speed test web app (just.Type) for practicing touch typing, written in Python and vanilla Javascript for frontend (and html & css of course).
+##### New Version in Progress..
+
+#### OLD VERSION: Basic typing speed test web app (just.Type) for practicing touch typing, written in Python and vanilla Javascript for frontend (and html & css of course).
 #### Potential implementation of database for leaderboard.
 
 ## Features: 
