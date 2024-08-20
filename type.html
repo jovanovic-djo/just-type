@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     {% load static %}
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+    <link rel="shortcut icon" type="image/png" href="{% 'img/favicon.png' %}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>justType</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% 'css/style.css' %}">
 </head>
 <body>
     <div class="type-area" id="type-area">
@@ -30,7 +30,7 @@
         <item><key>esc</key> - back to home</item>
         <item><key>~</key> - new test</item>
     </div>
-    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <script src="{% 'js/scripts.js' %}" defer></script>
 </body>
 </html>
 
