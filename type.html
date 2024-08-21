@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% 'img/favicon.png' %}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>justType</title>
-    <link rel="stylesheet" href="{% 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 </head>
 <body>
     <div class="type-area" id="type-area">
         <h1 id="test-title">...start typing whenever you are ready</h1>
-        <div id="word-display">{{ words|join:" " }}</div>
+        <div id="word-display"></div>
         <input autocomplete="off" type="text" id="typing-input" onblur="this.focus()" autofocus/>
     
         <div id="result-modal" class="modal">
@@ -30,7 +29,7 @@
         <item><key>esc</key> - back to home</item>
         <item><key>~</key> - new test</item>
     </div>
-    <script src="{% 'js/scripts.js' %}" defer></script>
+    <script src="js/scripts.js" defer></script>
 </body>
 </html>
 
