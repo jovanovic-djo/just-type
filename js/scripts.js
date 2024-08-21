@@ -1,3 +1,153 @@
+function selectFilePath(language, topic, complexity) {
+    let filePath = "";
+
+    if (language === "lorem") {
+        filePath = `words/${language}.json`;
+    } else if (topic === "none") {
+        filePath = `words/${language}${complexity}.json`;
+    } else if (topic === "numbers") {
+        filePath = `words/${topic}.json`;
+    } else {
+        filePath = `words/${language}${topic}.json`;
+    }
+
+    return filePath;
+}
+
+function loadWords(language, accent, topic, complexity, modeValue) {
+    const filePath = selectFilePath(language, topic, complexity);
+
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            let words = data.words || [];
+            words = shuffleArray(words);
+            if (topic === "quotes") {
+                words = words.slice(0, 1);
+            } else {
+                words = words.slice(0, modeValue);
+            }
+
+            words = accentTrim(accent, words, language);
+            displayWords(words);
+        })
+        .catch(error => console.error("Error loading words:", error));
+}
+
+
+function displayWords(words) {
+    const wordDisplayDiv = document.getElementById("word-display");
+    wordDisplayDiv.textContent = words.join(" ");
+}
+
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+
+function accentTrim(accent, words, language) {
+    if (accent === "off") {
+        let accentMap = {};
+
+        switch (language) {
+            case "serbian":
+                accentMap = {
+                    "ć": "c",
+                    "Ć": "C",
+                    "č": "c",
+                    "Č": "C",
+                    "š": "s",
+                    "Š": "S",
+                    "ž": "z",
+                    "Ž": "Z",
+                    "đ": "dj",
+                    "Đ": "Dj"
+                };
+                break;
+            case "german":
+                accentMap = {
+                    "ä": "a",
+                    "Ä": "A",
+                    "ö": "o",
+                    "Ö": "O",
+                    "ü": "u",
+                    "Ü": "U",
+                    "ß": "ss",
+                    "ẞ": "SS"
+                };
+                break;
+            case "french":
+                accentMap = {
+                    "à": "a",
+                    "À": "A",
+                    "â": "a",
+                    "Â": "A",
+                    "æ": "ae",
+                    "Æ": "AE",
+                    "ç": "c",
+                    "Ç": "C",
+                    "é": "e",
+                    "É": "E",
+                    "è": "e",
+                    "È": "E",
+                    "ê": "e",
+                    "Ê": "E",
+                    "ë": "e",
+                    "Ë": "E",
+                    "î": "i",
+                    "Î": "I",
+                    "ï": "i",
+                    "Ï": "I",
+                    "ô": "o",
+                    "Ô": "O",
+                    "œ": "oe",
+                    "Œ": "OE",
+                    "ù": "u",
+                    "Ù": "U",
+                    "û": "u",
+                    "Û": "U",
+                    "ü": "u",
+                    "Ü": "U",
+                    "ÿ": "y",
+                    "Ÿ": "Y"
+                };
+                break;
+            case "spanish":
+                accentMap = {
+                    "á": "a",
+                    "Á": "A",
+                    "é": "e",
+                    "É": "E",
+                    "í": "i",
+                    "Í": "I",
+                    "ñ": "n",
+                    "Ñ": "N",
+                    "ó": "o",
+                    "Ó": "O",
+                    "ú": "u",
+                    "Ú": "U",
+                    "ü": "u",
+                    "Ü": "U"
+                };
+                break;
+            default:
+                break;
+        }
+
+        words = words.map(word => 
+            word.split('').map(char => accentMap[char] || char).join('')
+        );
+    }
+
+    return words;
+}
+
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const languageChoice = document.getElementById('language-choice');
