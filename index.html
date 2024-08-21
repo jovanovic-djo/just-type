@@ -4,7 +4,7 @@
         {% load static %}
         <link rel="shortcut icon" type="image/png" href="{%'img/favicon.png' %}" />
         <title>JustType</title>
-        <link rel="stylesheet" href="{%'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
     </head>
 <body>
     <div class="header">
@@ -28,8 +28,7 @@
         </div>
     </div>
     <h1>just.Type</h1>
-    <form method="POST" action="{% url 'type' %}">
-        {% csrf_token %}
+    <form action="type.html" method="GET">
         <div class="wrapper-left">
             <div class="choice language-choice" id="language-choice">
                 <input type="radio" id="language-english" name="language" value="english" checked="checked" />
@@ -113,7 +112,7 @@
             </div>  
         </div>          
         <div class="button-container">
-            <button class="start-test" type="submit" id="start-test">START</button>
+            <button onclick="location.href='/type.html'" class="start-test" type="submit" id="start-test">START</button>
         </div>
     </form>
     <div class="instruction-container">
