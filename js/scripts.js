@@ -147,6 +147,47 @@ function accentTrim(accent, words, language) {
     return words;
 }
 
+// ***************************************************************************** TEST TEST **********************************************
+
+document.getElementById('word-display').addEventListener('click', function() {
+    const language = "serbian";   
+    const accent = "off";         
+    const topic = "none";         
+    const complexity = "";        
+    const modeValue = 10;         
+
+    loadWords(language, accent, topic, complexity, modeValue);
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('/words/englishfood.json')
+        .then(response => response.json())
+        .then(data => {
+            const dataDisplay = document.getElementById("dataDisplay");
+
+            // Create HTML elements to display the JSON data
+            const nameElement = document.createElement("p");
+            nameElement.textContent = "Name: " + data.name;
+
+            const ageElement = document.createElement("p");
+            ageElement.textContent = "Age: " + data.age;
+
+            const cityElement = document.createElement("p");
+            cityElement.textContent = "City: " + data.city;
+
+            // Append the elements to the "dataDisplay" div
+            dataDisplay.appendChild(nameElement);
+            dataDisplay.appendChild(ageElement);
+            dataDisplay.appendChild(cityElement);
+        })
+        .catch(error => console.error("Error fetching JSON data:", error));
+});
+
+
+// ***************************************************************************** TEST TEST **********************************************
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
