@@ -1,55 +1,3 @@
-function selectFilePath(language, topic, complexity) {
-    let filePath = "";
-
-    if (language === "lorem") {
-        filePath = `words/${language}.json`;
-    } else if (topic === "none") {
-        filePath = `words/${language}${complexity}.json`;
-    } else if (topic === "numbers") {
-        filePath = `words/${topic}.json`;
-    } else {
-        filePath = `words/${language}${topic}.json`;
-    }
-
-    return filePath;
-}
-
-function loadWords(language, accent, topic, complexity, modeValue) {
-    const filePath = selectFilePath(language, topic, complexity);
-
-    fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-            let words = data.words || [];
-            words = shuffleArray(words);
-            if (topic === "quotes") {
-                words = words.slice(0, 1);
-            } else {
-                words = words.slice(0, modeValue);
-            }
-
-            words = accentTrim(accent, words, language);
-            displayWords(words);
-        })
-        .catch(error => console.error("Error loading words:", error));
-}
-
-
-function displayWords(words) {
-    const wordDisplayDiv = document.getElementById("word-display");
-    wordDisplayDiv.textContent = words.join(" ");
-}
-
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-
 function accentTrim(accent, words, language) {
     if (accent === "off") {
         let accentMap = {};
@@ -147,41 +95,63 @@ function accentTrim(accent, words, language) {
     return words;
 }
 
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+function selectFilePath(language, topic, complexity) {
+    if (language === "lorem") {
+        return `words/${language}.json`;
+    } else if (topic === "none") {
+        return `words/${language}${complexity}.json`;
+    } else if (topic === "numbers") {
+        return `words/${topic}.json`;
+    } else {
+        return `words/${language}${topic}.json`;
+    }
+}
+
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function displayWords(words) {
+    const wordDisplay = document.getElementById('word-display');
+    wordDisplay.textContent = words.join(' ');
+}
+
+
 // ***************************************************************************** TEST TEST **********************************************
 
-document.getElementById('word-display').addEventListener('click', function() {
-    const language = "serbian";   
-    const accent = "off";         
-    const topic = "none";         
-    const complexity = "";        
-    const modeValue = 10;         
+document.addEventListener('DOMContentLoaded', function() {
+    const language = getQueryParam('language');
+    const accent = getQueryParam('accent');
+    const topic = getQueryParam('topic');
+    const complexity = getQueryParam('complexity');
+    const modeValue = parseInt(getQueryParam('mode-value'), 10);
 
-    loadWords(language, accent, topic, complexity, modeValue);
-});
+    const filePath = selectFilePath(language, topic, complexity);
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    fetch('/words/englishfood.json')
+    fetch(filePath)
         .then(response => response.json())
         .then(data => {
-            const dataDisplay = document.getElementById("dataDisplay");
-
-            // Create HTML elements to display the JSON data
-            const nameElement = document.createElement("p");
-            nameElement.textContent = "Name: " + data.name;
-
-            const ageElement = document.createElement("p");
-            ageElement.textContent = "Age: " + data.age;
-
-            const cityElement = document.createElement("p");
-            cityElement.textContent = "City: " + data.city;
-
-            // Append the elements to the "dataDisplay" div
-            dataDisplay.appendChild(nameElement);
-            dataDisplay.appendChild(ageElement);
-            dataDisplay.appendChild(cityElement);
+            let words = data.words || [];
+            words = shuffleArray(words); // Shuffle the words
+            if (topic === "quotes") {
+                words = words.slice(0, 1);
+            } else {
+                words = words.slice(0, modeValue);
+            }
+            words = accentTrim(accent, words, language);
+            displayWords(words);
         })
-        .catch(error => console.error("Error fetching JSON data:", error));
+        .catch(error => console.error('Error fetching JSON:', error));
 });
 
 
