@@ -131,39 +131,9 @@ function shuffleArray(array) {
 // DISPLAY WORDS IN ONE STRING
 function displayWords(words) {
     const wordDisplay = document.getElementById('word-display');
-    wordDisplay.textContent = words.join(' ');
+    wordDisplay.innerHTML = words.join(' ');
+    //wordDisplay.textContent
 }
-
-
-// ***************************************************************************** TEST TEST **********************************************
-
-document.addEventListener('DOMContentLoaded', function() {
-    const language = getQueryParam('language');
-    const accent = getQueryParam('accent');
-    const topic = getQueryParam('topic');
-    const complexity = getQueryParam('complexity');
-    const modeValue = parseInt(getQueryParam('mode-value'), 10);
-
-    const filePath = selectFilePath(language, topic, complexity);
-
-    fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-            let words = data.words || [];
-            words = shuffleArray(words); 
-            if (topic === "quotes") {
-                words = words.slice(0, 1);
-            } else {
-                words = words.slice(0, modeValue);
-            }
-            words = accentTrim(accent, words, language);
-            displayWords(words);
-        })
-        .catch(error => console.error('Error fetching JSON:', error));
-});
-
-
-// **************************************************************************************************************************
 
 
 // HANDLE SWITCHING RADIO BUTTONS
@@ -239,14 +209,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // TEST HANDLER
-
 document.addEventListener('DOMContentLoaded', () => {
+    const language = getQueryParam('language');
+    const accent = getQueryParam('accent');
+    const topic = getQueryParam('topic');
+    const complexity = getQueryParam('complexity');
+    const modeValue = parseInt(getQueryParam('mode-value'), 10);
+
+    const filePath = selectFilePath(language, topic, complexity);
+
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            let words = data.words || [];
+            words = shuffleArray(words); 
+            if (topic === "quotes") {
+                words = words.slice(0, 1);
+            } else {
+                words = words.slice(0, modeValue);
+            }
+            words = accentTrim(accent, words, language);
+            displayWords(words);
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+
     const words = document.getElementById('word-display').innerText.trim();
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
-    const closeModal = document.querySelector('.close');
-    
+    const closeModal = document.querySelector('.close');  
 
     let startTime = null;
     let timerInterval = null;
