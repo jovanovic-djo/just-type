@@ -1,55 +1,4 @@
-function selectFilePath(language, topic, complexity) {
-    let filePath = "";
-
-    if (language === "lorem") {
-        filePath = `words/${language}.json`;
-    } else if (topic === "none") {
-        filePath = `words/${language}${complexity}.json`;
-    } else if (topic === "numbers") {
-        filePath = `words/${topic}.json`;
-    } else {
-        filePath = `words/${language}${topic}.json`;
-    }
-
-    return filePath;
-}
-
-function loadWords(language, accent, topic, complexity, modeValue) {
-    const filePath = selectFilePath(language, topic, complexity);
-
-    fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-            let words = data.words || [];
-            words = shuffleArray(words);
-            if (topic === "quotes") {
-                words = words.slice(0, 1);
-            } else {
-                words = words.slice(0, modeValue);
-            }
-
-            words = accentTrim(accent, words, language);
-            displayWords(words);
-        })
-        .catch(error => console.error("Error loading words:", error));
-}
-
-
-function displayWords(words) {
-    const wordDisplayDiv = document.getElementById("word-display");
-    wordDisplayDiv.textContent = words.join(" ");
-}
-
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
-
+// TRIM THE ACCENT OFF THE CHARACTERS
 function accentTrim(accent, words, language) {
     if (accent === "off") {
         let accentMap = {};
@@ -148,6 +97,46 @@ function accentTrim(accent, words, language) {
 }
 
 
+// GET PARAMETER
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
+
+
+// GET CORRECT PATH BASED ON VARIABLES
+function selectFilePath(language, topic, complexity) {
+    if (language === "lorem") {
+        return `words/${language}.json`;
+    } else if (topic === "none") {
+        return `words/${language}${complexity}.json`;
+    } else if (topic === "numbers") {
+        return `words/${topic}.json`;
+    } else {
+        return `words/${language}${topic}.json`;
+    }
+}
+
+
+// SHUFFLE WORDS
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+
+// DISPLAY WORDS IN ONE STRING
+function displayWords(words) {
+    const wordDisplay = document.getElementById('word-display');
+    wordDisplay.innerHTML = words.join(' ');
+    //wordDisplay.textContent
+}
+
+
+// HANDLE SWITCHING RADIO BUTTONS
 document.addEventListener("DOMContentLoaded", () => {
 
     const languageChoice = document.getElementById('language-choice');
@@ -162,18 +151,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
     const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
 
+    // DISABLE RADIO BUTTON FUNCTION
     function toggleRadios(radioGroup, shouldDisable) {
         radioGroup.forEach(radio => {
             radio.disabled = shouldDisable;
         });
     }
     
+    // ENABLE RADIO BUTTON FUNCTION
     function enableRadios(radioGroup, shouldEnable) {
         radioGroup.forEach(radio => {
             radio.disabled = !shouldEnable;
         });
     }
 
+    // HANDLE RADIO BUTTON CASES
     function handleRadioChange() {
         const isLoremChecked = document.getElementById('language-lorem').checked;
         const isEnglishChecked = document.getElementById('language-english').checked;
@@ -214,13 +206,38 @@ document.addEventListener("DOMContentLoaded", () => {
     handleRadioChange();
 });
 
+
+
+// TEST HANDLER
 document.addEventListener('DOMContentLoaded', () => {
+    const language = getQueryParam('language');
+    const accent = getQueryParam('accent');
+    const topic = getQueryParam('topic');
+    const complexity = getQueryParam('complexity');
+    const modeValue = parseInt(getQueryParam('mode-value'), 10);
+
+    const filePath = selectFilePath(language, topic, complexity);
+
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            let words = data.words || [];
+            words = shuffleArray(words); 
+            if (topic === "quotes") {
+                words = words.slice(0, 1);
+            } else {
+                words = words.slice(0, modeValue);
+            }
+            words = accentTrim(accent, words, language);
+            displayWords(words);
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+
     const words = document.getElementById('word-display').innerText.trim();
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
-    const closeModal = document.querySelector('.close');
-    
+    const closeModal = document.querySelector('.close');  
 
     let startTime = null;
     let timerInterval = null;
@@ -343,6 +360,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+// THEME SWIRCH
+
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
 
@@ -362,6 +382,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+
+
+// HANDLE TEXT SIZE BASED ON COMPLEXITY
 
 document.addEventListener('DOMContentLoaded', function() {
     const complexityChoice = document.getElementById('complexity-choice');
