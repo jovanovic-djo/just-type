@@ -132,7 +132,6 @@ function shuffleArray(array) {
 function displayWords(words) {
     const wordDisplay = document.getElementById('word-display');
     wordDisplay.innerHTML = words.join(' ');
-    //wordDisplay.textContent
 }
 
 
@@ -207,33 +206,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+const language = getQueryParam('language');
+const accent = getQueryParam('accent');
+const topic = getQueryParam('topic');
+const complexity = getQueryParam('complexity');
+const modeValue = parseInt(getQueryParam('mode-value'), 10);
+
+const filePath = selectFilePath(language, topic, complexity);
+
+fetch(filePath)
+    .then(response => response.json())
+    .then(data => {
+        let array = data.words || [];
+        array = shuffleArray(array); 
+        if (topic === "quotes") {
+            array = array.slice(0, 1);
+        } else {
+            array = array.slice(0, modeValue);
+        }
+        array = accentTrim(accent, array, language);
+        displayWords(array);
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+
+    
 
 // TEST HANDLER
 document.addEventListener('DOMContentLoaded', () => {
-    const language = getQueryParam('language');
-    const accent = getQueryParam('accent');
-    const topic = getQueryParam('topic');
-    const complexity = getQueryParam('complexity');
-    const modeValue = parseInt(getQueryParam('mode-value'), 10);
-
-    const filePath = selectFilePath(language, topic, complexity);
-
-    fetch(filePath)
-        .then(response => response.json())
-        .then(data => {
-            let words = data.words || [];
-            words = shuffleArray(words); 
-            if (topic === "quotes") {
-                words = words.slice(0, 1);
-            } else {
-                words = words.slice(0, modeValue);
-            }
-            words = accentTrim(accent, words, language);
-            displayWords(words);
-        })
-        .catch(error => console.error('Error fetching JSON:', error));
-
-    const words = document.getElementById('word-display').innerText.trim();
+    const words = document.getElementById('word-display').innerText
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
@@ -362,7 +362,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // THEME SWIRCH
-
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
 
@@ -385,7 +384,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // HANDLE TEXT SIZE BASED ON COMPLEXITY
-
 document.addEventListener('DOMContentLoaded', function() {
     const complexityChoice = document.getElementById('complexity-choice');
 
