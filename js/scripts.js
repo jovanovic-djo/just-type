@@ -134,131 +134,65 @@ function displayWords(words) {
     wordDisplay.innerHTML = words.join(' ');
 }
 
-
-// HANDLE SWITCHING RADIO BUTTONS
-document.addEventListener("DOMContentLoaded", () => {
-
-    const languageChoice = document.getElementById('language-choice');
-    const topicChoice = document.getElementById('topic-choice');
-    const complexityChoice = document.getElementById('complexity-choice');
-    const modeValueChoice = document.getElementById('mode-value-choice');
-    const accentChoice = document.getElementById('accent-choice');
-
-    const accentRadios = accentChoice.querySelectorAll('input[type="radio"]');
-    const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
-    const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
-    const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
-    const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
-
-    // DISABLE RADIO BUTTON FUNCTION
-    function toggleRadios(radioGroup, shouldDisable) {
-        radioGroup.forEach(radio => {
-            radio.disabled = shouldDisable;
-        });
-    }
-    
-    // ENABLE RADIO BUTTON FUNCTION
-    function enableRadios(radioGroup, shouldEnable) {
-        radioGroup.forEach(radio => {
-            radio.disabled = !shouldEnable;
-        });
-    }
-
-    // HANDLE RADIO BUTTON CASES
-    function handleRadioChange() {
-        const isLoremChecked = document.getElementById('language-lorem').checked;
-        const isEnglishChecked = document.getElementById('language-english').checked;
-        const isSerbianChecked = document.getElementById('language-serbian').checked;
-        const isGermanChecked = document.getElementById('language-german').checked;
-        const isSpanishChecked = document.getElementById('language-spanish').checked;
-        const isFrenchChecked = document.getElementById('language-french').checked;
-
-        const isNumbersChecked = document.getElementById('topic-numbers').checked;
-        const isAnimalsChecked = document.getElementById('topic-animals').checked;
-        const isFoodChecked = document.getElementById('topic-food').checked;
-        const isObjectsChecked = document.getElementById('topic-objects').checked;
-        const isQuotesChecked = document.getElementById('topic-quotes').checked;
-
-        toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
-
-        toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
-
-        toggleRadios(topicRadios, isLoremChecked);
-
-        toggleRadios(languageRadios, isNumbersChecked);
-
-        enableRadios(modeValueRadios, isEnglishChecked || isSerbianChecked || isGermanChecked || isSpanishChecked || isFrenchChecked);
-
-        if (isLoremChecked) {
-            enableRadios(modeValueRadios, true);
-        } else {
-            toggleRadios(modeValueRadios, isQuotesChecked);
-        }
-    }
-
-    languageChoice.addEventListener('change', handleRadioChange);
-    topicChoice.addEventListener('change', handleRadioChange);
-    complexityChoice.addEventListener('change', handleRadioChange);
-    modeValueChoice.addEventListener('change', handleRadioChange);
-    accentChoice.addEventListener('change', handleRadioChange);
-    
-    handleRadioChange();
-});
+let words = [];
 
 
-const language = getQueryParam('language');
-const accent = getQueryParam('accent');
-const topic = getQueryParam('topic');
-const complexity = getQueryParam('complexity');
-const modeValue = parseInt(getQueryParam('mode-value'), 10);
+// FETCH WORDS FUNCION
+function fetchWords(language, accent, topic, complexity, modeValue) {
+    const filePath = selectFilePath(language, topic, complexity);
 
-const filePath = selectFilePath(language, topic, complexity);
+    fetch(filePath)
+        .then(response => response.json())
+        .then(data => {
+            words = data.words || [];
+            words = shuffleArray(words); 
+            if (topic === "quotes") {
+                words = words.slice(0, 1);
+            } else {
+                words = words.slice(0, modeValue);
+            }
+            words = accentTrim(accent, words, language);
+            displayWords(words);
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+}
 
-fetch(filePath)
-    .then(response => response.json())
-    .then(data => {
-        let array = data.words || [];
-        array = shuffleArray(array); 
-        if (topic === "quotes") {
-            array = array.slice(0, 1);
-        } else {
-            array = array.slice(0, modeValue);
-        }
-        array = accentTrim(accent, array, language);
-        displayWords(array);
-    })
-    .catch(error => console.error('Error fetching JSON:', error));
-
-    
 
 // TEST HANDLER
 document.addEventListener('DOMContentLoaded', () => {
-    const words = document.getElementById('word-display').innerText
+    const language = getQueryParam('language');
+    const accent = getQueryParam('accent');
+    const topic = getQueryParam('topic');
+    const complexity = getQueryParam('complexity');
+    const modeValue = parseInt(getQueryParam('mode-value'), 10);
+    
+    fetchWords(language, accent, topic, complexity, modeValue);
+
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     const closeModal = document.querySelector('.close');  
-
+    
     let startTime = null;
     let timerInterval = null;
-
+    
     const redirectHome = () => {
         window.location.href = '/';
     };
-
+    
     const newTest = () => {
         window.location.reload();
     };
-
+    
     const restartTest = () => {
         typingInput.value = "";
-        typedWordsDiv.innerHTML = words;
+        typedWordsDiv.innerHTML = words.join(' ');
         startTime = null;
         clearInterval(timerInterval);
         resultModal.style.display = 'none';
         typingInput.focus();
     };
-
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             e.preventDefault();
@@ -272,14 +206,14 @@ document.addEventListener('DOMContentLoaded', () => {
             newTest();
         }
     });
-
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
             e.preventDefault();
             restartTest();
         }
     });
-
+    
     typingInput.addEventListener('input', function() {
         if (startTime === null) {
             startTime = new Date();
@@ -287,16 +221,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-
+        
         document.getElementById("test-title").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
-
+        
         const typed = typingInput.value;
         let correctChars = 0;
         let html = '';
-
+        
         for (let i = 0; i < words.length; i++) {
             if (i < typed.length) {
                 if (words[i] === typed[i]) {
@@ -311,17 +245,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 html += words[i];
             }
         }
-
+        
         typedWordsDiv.innerHTML = html;
-
-        if (typed.length == words.length) {
+        
+        if (typed.length === words.length) {
             clearInterval(timerInterval);
-
+            
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
             const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
             const accuracy = Math.round((correctChars / typed.length) * 100);
-
+            
             document.getElementById('cpm').innerText = `CPM: ${cpm}`;
             document.getElementById('wpm').innerText = `WPM: ${wpm}`;
             document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
@@ -329,36 +263,104 @@ document.addEventListener('DOMContentLoaded', () => {
             resultModal.style.display = "block";
         }
     });
-
-
+    
     closeModal.onclick = function() {
         resultModal.style.display = "none";
     };
-
+    
     window.onclick = function(event) {
         if (event.target === resultModal) {
             resultModal.style.display = "none";
         }
     };
-
+    
     const focusInput = () => {
         typingInput.focus();
     };
-
+    
     document.addEventListener('click', (e) => {
         if (!resultModal.contains(e.target) && e.target !== typingInput) {
             focusInput();
         }
     });
-
+    
     document.addEventListener('keydown', () => {
         focusInput();
     });
-
-    focusInput();
-
+    
+    focusInput(); 
 });
 
+
+// HANDLE SWITCHING RADIO BUTTONS
+document.addEventListener("DOMContentLoaded", () => {
+    
+    const languageChoice = document.getElementById('language-choice');
+    const topicChoice = document.getElementById('topic-choice');
+    const complexityChoice = document.getElementById('complexity-choice');
+    const modeValueChoice = document.getElementById('mode-value-choice');
+    const accentChoice = document.getElementById('accent-choice');
+    
+    const accentRadios = accentChoice.querySelectorAll('input[type="radio"]');
+    const topicRadios = topicChoice.querySelectorAll('input[type="radio"]');
+    const complexityRadios = complexityChoice.querySelectorAll('input[type="radio"]');
+    const modeValueRadios = modeValueChoice.querySelectorAll('input[type="radio"]');
+    const languageRadios = languageChoice.querySelectorAll('input[type="radio"]');
+    
+    // DISABLE RADIO BUTTON FUNCTION
+    function toggleRadios(radioGroup, shouldDisable) {
+        radioGroup.forEach(radio => {
+            radio.disabled = shouldDisable;
+        });
+    }
+    
+    // ENABLE RADIO BUTTON FUNCTION
+    function enableRadios(radioGroup, shouldEnable) {
+        radioGroup.forEach(radio => {
+            radio.disabled = !shouldEnable;
+        });
+    }
+    
+    // HANDLE RADIO BUTTON CASES
+    function handleRadioChange() {
+        const isLoremChecked = document.getElementById('language-lorem').checked;
+        const isEnglishChecked = document.getElementById('language-english').checked;
+        const isSerbianChecked = document.getElementById('language-serbian').checked;
+        const isGermanChecked = document.getElementById('language-german').checked;
+        const isSpanishChecked = document.getElementById('language-spanish').checked;
+        const isFrenchChecked = document.getElementById('language-french').checked;
+        
+        const isNumbersChecked = document.getElementById('topic-numbers').checked;
+        const isAnimalsChecked = document.getElementById('topic-animals').checked;
+        const isFoodChecked = document.getElementById('topic-food').checked;
+        const isObjectsChecked = document.getElementById('topic-objects').checked;
+        const isQuotesChecked = document.getElementById('topic-quotes').checked;
+        
+        toggleRadios(accentRadios, isEnglishChecked || isLoremChecked || isNumbersChecked);
+        
+        toggleRadios(complexityRadios, isLoremChecked || isNumbersChecked || isAnimalsChecked || isFoodChecked ||isObjectsChecked || isQuotesChecked);
+        
+        toggleRadios(topicRadios, isLoremChecked);
+        
+        toggleRadios(languageRadios, isNumbersChecked);
+        
+        enableRadios(modeValueRadios, isEnglishChecked || isSerbianChecked || isGermanChecked || isSpanishChecked || isFrenchChecked);
+        
+        if (isLoremChecked) {
+            enableRadios(modeValueRadios, true);
+        } else {
+            toggleRadios(modeValueRadios, isQuotesChecked);
+        }
+    }
+    
+    languageChoice.addEventListener('change', handleRadioChange);
+    topicChoice.addEventListener('change', handleRadioChange);
+    complexityChoice.addEventListener('change', handleRadioChange);
+    modeValueChoice.addEventListener('change', handleRadioChange);
+    accentChoice.addEventListener('change', handleRadioChange);
+    
+    handleRadioChange();
+});
 
 
 // THEME SWIRCH
@@ -380,7 +382,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-
 
 
 // HANDLE TEXT SIZE BASED ON COMPLEXITY
