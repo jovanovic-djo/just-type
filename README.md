@@ -12,5 +12,3 @@
 - wpm, accuracy and cpm results
 - Correct and incorrect input indicators while typing
 - Themes (of course, dark one and light one)
-
-### In progress: design modification..
