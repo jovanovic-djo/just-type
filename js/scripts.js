@@ -221,45 +221,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-        
+    
         document.getElementById("test-title").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
-        
+    
         const typed = typingInput.value;
         let correctChars = 0;
         let html = '';
-        
+        let typedIndex = 0;
+
         for (let i = 0; i < words.length; i++) {
-            if (i < typed.length) {
-                if (words[i] === typed[i]) {
-                    html += `<span class="correct">${words[i]}</span>`;
-                    correctChars++;
+            const word = words[i];
+            for (let j = 0; j < word.length; j++) {
+                if (typedIndex < typed.length) {
+                    if (typed[typedIndex] === word[j]) {
+                        html += `<span class="correct">${word[j]}</span>`;
+                        correctChars++;
+                    } else {
+                        html += `<span class="incorrect">${word[j]}</span>`;
+                    }
+                    typedIndex++;
+                } else if (typedIndex === typed.length) {
+                    html += `<span class="next-char">${word[j]}</span>`;
+                    typedIndex++;
                 } else {
-                    html += `<span class="incorrect">${words[i]}</span>`;
+                    html += word[j];
                 }
-            } else if (i === typed.length) {
-                html += `<span class="next-char">${words[i]}</span>`;
-            } else {
-                html += words[i];
             }
+            html += ' ';
+            typedIndex++;
         }
-        
+    
         typedWordsDiv.innerHTML = html;
-        
-        if (typed.length === words.length) {
+    
+        if (typed.length === words.join(' ').length) {
             clearInterval(timerInterval);
-            
+    
             const totalTime = (new Date() - startTime) / 1000;
             const cpm = Math.round((typed.length / totalTime) * 60);
             const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
             const accuracy = Math.round((correctChars / typed.length) * 100);
-            
+    
             document.getElementById('cpm').innerText = `CPM: ${cpm}`;
             document.getElementById('wpm').innerText = `WPM: ${wpm}`;
             document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
-            
+    
             resultModal.style.display = "block";
         }
     });
