@@ -214,7 +214,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+    let isModalVisible = false;
+
     typingInput.addEventListener('input', function() {
+        if (isModalVisible) {
+            return;
+        }
+    
         if (startTime === null) {
             startTime = new Date();
             timerInterval = setInterval(() => {
@@ -227,11 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
     
-        const typed = typingInput.value;
+        const typed = typingInput.value; 
         let correctChars = 0;
         let html = '';
-        let typedIndex = 0;
+    
 
+        let typedIndex = 0;  
         for (let i = 0; i < words.length; i++) {
             const word = words[i];
             for (let j = 0; j < word.length; j++) {
@@ -269,16 +276,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
     
             resultModal.style.display = "block";
+            isModalVisible = true;
         }
     });
     
     closeModal.onclick = function() {
         resultModal.style.display = "none";
+        isModalVisible = false;
     };
     
     window.onclick = function(event) {
         if (event.target === resultModal) {
             resultModal.style.display = "none";
+            isModalVisible = false;
         }
     };
     
