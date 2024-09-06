@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startTime = null;
         clearInterval(timerInterval);
         resultModal.style.display = 'none';
+        isModalVisible = false;
         typingInput.focus();
     };
     
