@@ -177,13 +177,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerInterval = null;
     
     const redirectHome = () => {
-        window.location.href = '/';
+        window.location.href = './index.html';
     };
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            redirectHome();
+        }
+    });
     
+
     const newTest = () => {
         window.location.reload();
     };
     
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' || e.key === '~') {
+            e.preventDefault();
+            newTest();
+        }
+    });
+
+
     const restartTest = () => {
         typingInput.value = "";
         typedWordsDiv.innerHTML = words.join(' ');
@@ -191,23 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timerInterval);
         resultModal.style.display = 'none';
         isModalVisible = false;
+        document.getElementById("test-title").style.opacity = 0.8;
+        document.getElementById("instruction-container").style.opacity = 0.8;
         typingInput.focus();
     };
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            redirectHome();
-        }
-    });
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === '`' || e.key === '~') {
-            e.preventDefault();
-            newTest();
-        }
-    });
-    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
             e.preventDefault();
@@ -228,11 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-    
+        
         document.getElementById("test-title").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
+
     
         const typed = typingInput.value; 
         let correctChars = 0;
