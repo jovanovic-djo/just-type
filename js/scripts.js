@@ -207,6 +207,8 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(timerInterval);
         resultModal.style.display = 'none';
         isModalVisible = false;
+        document.getElementById("test-title").style.opacity = 0.8;
+        document.getElementById("instruction-container").style.opacity = 0.8;
         typingInput.focus();
     };
 
@@ -217,7 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-
     let isModalVisible = false;
 
     typingInput.addEventListener('input', function() {
@@ -231,11 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const elapsed = Math.floor((new Date() - startTime) / 1000);
             }, 1000);
         }
-    
+        
         document.getElementById("test-title").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("instruction-container").style.transition = "opacity 0.7s ease-in-out";
         document.getElementById("test-title").style.opacity = 0.1;
         document.getElementById("instruction-container").style.opacity = 0.1;
+
     
         const typed = typingInput.value; 
         let correctChars = 0;
