@@ -177,13 +177,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let timerInterval = null;
     
     const redirectHome = () => {
-        window.location.href = '/';
+        window.location.href = './index.html';
     };
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            e.preventDefault();
+            redirectHome();
+        }
+    });
     
+
     const newTest = () => {
         window.location.reload();
     };
     
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '`' || e.key === '~') {
+            e.preventDefault();
+            newTest();
+        }
+    });
+
+
     const restartTest = () => {
         typingInput.value = "";
         typedWordsDiv.innerHTML = words.join(' ');
@@ -193,21 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isModalVisible = false;
         typingInput.focus();
     };
-    
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            e.preventDefault();
-            redirectHome();
-        }
-    });
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === '`' || e.key === '~') {
-            e.preventDefault();
-            newTest();
-        }
-    });
-    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
             e.preventDefault();
@@ -215,6 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
+
     let isModalVisible = false;
 
     typingInput.addEventListener('input', function() {
