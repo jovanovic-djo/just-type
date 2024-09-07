@@ -263,8 +263,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     html += word[j];
                 }
             }
-            html += ' ';
-            typedIndex++;
+        
+            if (i < words.length - 1) {
+                if (typedIndex < typed.length) {
+                    if (typed[typedIndex] === ' ') {
+                        html += `<span class="correct"> </span>`;
+                        correctChars++;
+                    } else {
+                        html += `<span class="incorrect"> </span>`;
+                    }
+                } else if (typedIndex === typed.length) {
+                    html += `<span class="next-char"> </span>`;
+                } else {
+                    html += ' ';
+                }
+                typedIndex++;
+            }
         }
     
         typedWordsDiv.innerHTML = html;
