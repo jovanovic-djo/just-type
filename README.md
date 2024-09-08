@@ -1,7 +1,3 @@
-##### New Version in Progress..
-
-#### OLD VERSION: Basic typing speed test web app (just.Type) for practicing touch typing, written in Python (Potential implementation of database for leaderboard) and vanilla Javascript for frontend (and html & css of course).
-
 ## Features: 
 - Multiple languages (English, French, German, Serbian, Spanish, also lorem ipsum included)
 - Accent trim (for smoother test)
