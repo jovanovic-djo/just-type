@@ -178,6 +178,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const redirectHome = () => {
         window.location.href = './index.html';
+        //window.history.back()
+        //window.history.go(-1)
     };
 
     document.addEventListener('keydown', (e) => {
@@ -401,24 +403,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// THEME SWIRCH
+// THEME SWITCH
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
 
     if (localStorage.getItem('theme') === 'dark') {
         document.documentElement.classList.add('theme-dark');
-        themeToggle.checked = true;
+        if (themeToggle) themeToggle.checked = true;
     }
 
-    themeToggle.addEventListener('change', () => {
-        if (themeToggle.checked) {
-            document.documentElement.classList.add('theme-dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            document.documentElement.classList.remove('theme-dark');
-            localStorage.setItem('theme', 'light');
-        }
-    });
+    if (themeToggle) {
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                document.documentElement.classList.add('theme-dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('theme-dark');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
 });
 
 
