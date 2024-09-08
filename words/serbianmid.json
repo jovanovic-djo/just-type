@@ -10,7 +10,6 @@
         "često",
         "cvet",
         "daleko",
-        "deo",
         "dobrota",
         "duhovit",
         "džep",
@@ -18,7 +17,6 @@
         "fotografija",
         "garderoba",
         "gosti",
-        "grad",
         "greška",
         "hladno",
         "ideja",
@@ -31,8 +29,6 @@
         "kompjuter",
         "krov",
         "kupovina",
-        "lak",
-        "lepo",
         "ljubav",
         "majica",
         "mesec",
@@ -56,7 +52,6 @@
         "prozor",
         "putovanje",
         "radost",
-        "reka",
         "rođendan",
         "samopouzdanje",
         "sastanak",
@@ -64,12 +59,10 @@
         "spavanje",
         "stolica",
         "sunce",
-        "svet",
         "svetlo",
         "tajna",
         "telefon",
         "umetnost",
-        "vetar",
-        "voda"
+        "vetar"
     ]
 }
