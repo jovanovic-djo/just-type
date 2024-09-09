@@ -8,3 +8,13 @@
 - wpm, accuracy and cpm results
 - Correct and incorrect input indicators while typing
 - Themes (of course, dark one and light one)
+
+## Design
+##### Minimalist design
+![image](https://github.com/user-attachments/assets/7210c4fe-daf3-4d58-b749-e59eab242418)
+##### Intuitive test
+![image](https://github.com/user-attachments/assets/f19d82f7-c2e7-499e-80c8-bfd3ebdc3f7d)
+##### Result display
+![image](https://github.com/user-attachments/assets/a7e1f52d-ad42-455d-839b-0255b439fd44)
+
+
