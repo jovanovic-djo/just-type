@@ -1,3 +1,6 @@
+#### Typing speed test, great for touch typing exercises, most important functionalities/features are included.
+
+
 ## Features: 
 - Multiple languages (English, French, German, Serbian, Spanish, also lorem ipsum included)
 - Accent trim (for smoother test)
