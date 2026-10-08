@@ -171,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
-    const closeModal = document.querySelector('.close');  
     
     let startTime = null;
     let timerInterval = null;
@@ -301,11 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
             isModalVisible = true;
         }
     });
-    
-    closeModal.onclick = function() {
-        resultModal.style.display = "none";
-        isModalVisible = false;
-    };
     
     window.onclick = function(event) {
         if (event.target === resultModal) {
