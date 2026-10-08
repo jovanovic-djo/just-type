@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                localStorage.clear();
+                localStorage.removeItem('complexity');
             }
         });
 
