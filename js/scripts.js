@@ -160,15 +160,17 @@ function fetchWords(language, accent, topic, complexity, modeValue) {
 
 // TEST HANDLER
 document.addEventListener('DOMContentLoaded', () => {
+    const typingInput = document.getElementById('typing-input');
+    if (!typingInput) return;
+
     const language = getQueryParam('language');
     const accent = getQueryParam('accent');
     const topic = getQueryParam('topic');
     const complexity = getQueryParam('complexity');
     const modeValue = parseInt(getQueryParam('mode-value'), 10);
-    
+
     fetchWords(language, accent, topic, complexity, modeValue);
 
-    const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     
@@ -330,6 +332,8 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
     
     const languageChoice = document.getElementById('language-choice');
+    if (!languageChoice) return;
+
     const topicChoice = document.getElementById('topic-choice');
     const complexityChoice = document.getElementById('complexity-choice');
     const modeValueChoice = document.getElementById('mode-value-choice');
