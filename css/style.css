@@ -10,6 +10,7 @@
     --hover-background: #e4ceb0;
     --checked-background: #102C57;
     --checked-text: #f1e4d1;
+    --primary-text: #102C57;
     --disabled: #eee1ce;
     --disabled-text: #6e6e6e;
     --wrapper: #fbe7d3;
@@ -23,21 +24,23 @@
     --font-size-small: 12px;
 }
 
+/* Tokyo Night palette */
 .theme-dark {
-    --primary-color: #007969;
-    --secondary-color: #005B41;
-    --background-color: #232D3F;
-    --text-color: #ecf0f1;
-    --border-color: #7a8699;
-    --hover-background: #007969;
-    --checked-background: #00aa79;
-    --checked-text: #232D3F;
-    --disabled: #313e56;
-    --disabled-text: #808f87;
-    --wrapper: #1d2534;
-    --default-button: #19202d;
-    --correct-color: #008e65;
-    --incorrect-color: #f56767;
+    --primary-color: #73daca;
+    --primary-text: #1a1b26;
+    --secondary-color: #1a1b26;
+    --background-color: #1a1b26;
+    --text-color: #c0caf5;
+    --border-color: #737aa2;
+    --hover-background: #414868;
+    --checked-background: #9ece6a;
+    --checked-text: #1a1b26;
+    --disabled: #16161e;
+    --disabled-text: #565f89;
+    --wrapper: #16161e;
+    --default-button: #292e42;
+    --correct-color: #73daca;
+    --incorrect-color: #f7768e;
     --icon-filter: invert(1);
 }
 /*GENERAL*/
@@ -300,7 +303,7 @@ input[type="radio"]:checked:disabled + label {
 
 .start-test {
     background-color: var(--primary-color);
-    color: var(--text-color);
+    color: var(--primary-text);
     border: 2px solid var(--border-color);
     border-radius: 25px;
     cursor: pointer;
