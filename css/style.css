@@ -8,11 +8,15 @@
     --text-color: #102C57;
     --border-color: #102C57;
     --hover-background: #e4ceb0;
-    --checked-background: #d1b493;
+    --checked-background: #102C57;
+    --checked-text: #f1e4d1;
     --disabled: #eee1ce;
     --disabled-text: #6e6e6e;
     --wrapper: #fbe7d3;
     --default-button: #f5dbc1;
+    --correct-color: #a17341;
+    --incorrect-color: #770808;
+    --icon-filter: none;
     --font-family: monospace;
     --font-size-base: 16px;
     --font-size-medium: 22px;
@@ -20,17 +24,21 @@
 }
 
 .theme-dark {
-    --primary-color: #008170;
+    --primary-color: #007969;
     --secondary-color: #005B41;
     --background-color: #232D3F;
     --text-color: #ecf0f1;
-    --border-color: #0F0F0F;
-    --hover-background: #008170;
-    --checked-background: #005B41;
+    --border-color: #7a8699;
+    --hover-background: #007969;
+    --checked-background: #00aa79;
+    --checked-text: #232D3F;
     --disabled: #313e56;
     --disabled-text: #808f87;
     --wrapper: #1d2534;
     --default-button: #19202d;
+    --correct-color: #008e65;
+    --incorrect-color: #f56767;
+    --icon-filter: invert(1);
 }
 /*GENERAL*/
 html {
@@ -73,8 +81,8 @@ h1 {
 }
 
 key {
-    color: var(--checked-background);
-    background-color: var(--border-color);
+    color: var(--background-color);
+    background-color: var(--text-color);
     margin: 0;
     padding: 4px;
     border-radius: .1rem;
@@ -112,8 +120,9 @@ item {
 .social-item a img {
     width: 26px;
     height: 26px; 
-    transition: opacity 0.4s ease; 
-    opacity: 0.1;
+    transition: opacity 0.4s ease;
+    opacity: 0.5;
+    filter: var(--icon-filter);
     cursor: pointer;
 }
 
@@ -168,10 +177,6 @@ item {
     transition: .4s;
 }
 
-input:checked + .slider {
-    background-color: var(--primary-color);
-}
-
 input:checked + .slider:before {
     transform: translateX(26px);
 }
@@ -217,6 +222,7 @@ form {
 
 .accent-choice input[type="radio"]:checked + label {
     background: var(--checked-background);
+    color: var(--checked-text);
 }
 
 .accent-choice {
@@ -265,6 +271,7 @@ form {
 
 .choice input[type="radio"]:checked + label {
     background: var(--checked-background);
+    color: var(--checked-text);
 }
 
 input[type="radio"] + label {
@@ -304,21 +311,25 @@ input[type="radio"]:checked:disabled + label {
 }
 
 .start-test:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--text-color);
     color: var(--background-color);
 }
 
 .start-test:focus {
     outline: none;
-    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.start-test:focus-visible {
+    outline: 3px solid var(--text-color);
+    outline-offset: 3px;
 }
 /*TYPE PAGE*/
-.correct { 
-    color: var(--secondary-color); 
+.correct {
+    color: var(--correct-color);
 }
-.incorrect { 
-    color: rgb(119, 8, 8); 
-    border-bottom: 5px solid rgb(119, 8, 8);
+.incorrect {
+    color: var(--incorrect-color);
+    border-bottom: 5px solid var(--incorrect-color);
 }
 .next-char { 
     border-bottom: 5px solid var(--text-color); 
@@ -372,7 +383,6 @@ input[type="radio"]:checked:disabled + label {
 .modal-content {
     background-color: var(--hover-background);
     margin: 150px auto auto auto;
-    opacity: 0.8;
     padding: 15px;
     border: 1px solid var(--disabled);
     width: 40%;
