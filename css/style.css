@@ -124,13 +124,14 @@ item {
     width: 26px;
     height: 26px; 
     transition: opacity 0.4s ease;
-    opacity: 0.5;
+    opacity: 0.1;
     filter: var(--icon-filter);
     cursor: pointer;
 }
 
-.social-item a img:hover {
-    opacity: 1; 
+.social-item a img:hover,
+.social-item a:focus-visible img {
+    opacity: 1;
 }
 .wrapper-right, .wrapper-left {
     border-radius: 50px;
