@@ -162,6 +162,28 @@ function renderProgress(display, target, typed) {
 }
 
 
+// LENGTH OF TYPED TEXT THAT CAN'T BE DELETED: EVERYTHING UP TO AND INCLUDING
+// THE LAST WORD THAT WAS TYPED CORRECTLY TOGETHER WITH ITS SPACE
+function lockedLength(typed, target) {
+    let locked = 0;
+    let wordStart = 0;
+
+    for (let i = 0; i < typed.length && i < target.length; i++) {
+        if (target[i] === ' ') {
+            if (typed.slice(wordStart, i + 1) === target.slice(wordStart, i + 1)) {
+                locked = i + 1;
+            }
+            wordStart = i + 1;
+        }
+    }
+    return locked;
+}
+
+
+// KEYS THAT WOULD MOVE THE CARET INSIDE THE TYPED TEXT
+const caretKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'];
+
+
 // TEST HANDLER
 document.addEventListener('DOMContentLoaded', () => {
     const language = getQueryParam('language');
@@ -182,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isModalVisible = false;
     let keystrokes = 0;
     let mistakes = 0;
-    let previousLength = 0;
+    let previousValue = "";
 
     const setChromeOpacity = (opacity) => {
         testTitle.style.opacity = opacity;
@@ -203,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startTime = null;
         keystrokes = 0;
         mistakes = 0;
-        previousLength = 0;
+        previousValue = "";
         hideModal();
         setChromeOpacity(0.8);
         typingInput.focus();
@@ -219,6 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.key === 'Tab') {
             e.preventDefault();
             restartTest();
+        } else if (caretKeys.includes(e.key)) {
+            // KEEP THE CARET AT THE END, SO TEXT IS ONLY ADDED OR DELETED THERE
+            e.preventDefault();
         }
         typingInput.focus();
     });
@@ -236,18 +261,26 @@ document.addEventListener('DOMContentLoaded', () => {
         instructions.style.transition = "opacity 0.7s ease-in-out";
         setChromeOpacity(0.1);
 
-        const typed = typingInput.value;
+        let typed = typingInput.value;
         const target = words.join(' ');
+
+        // DON'T LET DELETING GO BACK INTO A CORRECTLY TYPED WORD
+        const lockedText = previousValue.slice(0, lockedLength(previousValue, target));
+        if (!typed.startsWith(lockedText)) {
+            typed = previousValue.startsWith(typed) ? lockedText : previousValue;
+            typingInput.value = typed;
+        }
+
         const correctChars = renderProgress(typedWordsDiv, target, typed);
 
         // COUNT EVERY NEW CHARACTER, SO MISTAKES FIXED WITH BACKSPACE STILL COUNT
-        for (let i = previousLength; i < typed.length; i++) {
+        for (let i = previousValue.length; i < typed.length; i++) {
             keystrokes++;
             if (typed[i] !== target[i]) {
                 mistakes++;
             }
         }
-        previousLength = typed.length;
+        previousValue = typed;
 
         if (typed.length === target.length) {
             const minutes = (new Date() - startTime) / 60000;
