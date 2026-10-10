@@ -102,9 +102,17 @@ function fetchWords(language, accent, topic, complexity, modeValue) {
     const filePath = selectFilePath(language, topic, complexity);
 
     fetch(filePath)
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        })
         .then(data => {
             words = data.words || [];
+            if (words.length === 0) {
+                throw new Error('word list is empty');
+            }
             words = shuffleArray(words);
             if (topic === "quotes") {
                 words = words.slice(0, 1);
@@ -114,7 +122,12 @@ function fetchWords(language, accent, topic, complexity, modeValue) {
             words = accentTrim(accent, words, language);
             displayWords(words);
         })
-        .catch(error => console.error('Error fetching JSON:', error));
+        .catch(error => {
+            words = [];
+            console.error(`Error loading ${filePath}:`, error);
+            document.getElementById('word-display').textContent =
+                "Couldn't load the words. Check your connection and reload the page.";
+        });
 }
 
 
@@ -182,6 +195,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const restartTest = () => {
+        if (words.length === 0) {
+            return;
+        }
         typingInput.value = "";
         displayWords(words);
         startTime = null;
@@ -209,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     typingInput.addEventListener('input', () => {
-        if (isModalVisible) {
+        if (isModalVisible || words.length === 0) {
             return;
         }
 
