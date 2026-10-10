@@ -31,16 +31,3 @@ document.addEventListener('DOMContentLoaded', () => {
     handleRadioChange();
 });
 
-
-// REMEMBER COMPLEXITY FOR TEXT SIZE ON THE TEST PAGE
-document.addEventListener('DOMContentLoaded', () => {
-    const radios = document.querySelectorAll('#complexity-choice input[type="radio"]');
-
-    radios.forEach(radio => {
-        radio.addEventListener('change', () => {
-            if (radio.checked) {
-                localStorage.setItem('complexity', radio.value);
-            }
-        });
-    });
-});

@@ -212,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             e.preventDefault();
-            localStorage.removeItem('complexity');
             window.location.href = './index.html';
         } else if (e.key === '`' || e.key === '~') {
             e.preventDefault();
@@ -284,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // HANDLE TEXT SIZE BASED ON COMPLEXITY
 document.addEventListener('DOMContentLoaded', () => {
     const wordDisplay = document.getElementById('word-display');
-    const complexity = localStorage.getItem('complexity');
+    const complexity = getQueryParam('complexity');
 
     if (complexity === 'insane') {
         wordDisplay.style.fontSize = '32px';
