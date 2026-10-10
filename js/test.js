@@ -167,6 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let startTime = null;
     let isModalVisible = false;
+    let keystrokes = 0;
+    let mistakes = 0;
+    let previousLength = 0;
 
     const setChromeOpacity = (opacity) => {
         testTitle.style.opacity = opacity;
@@ -182,6 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         typingInput.value = "";
         displayWords(words);
         startTime = null;
+        keystrokes = 0;
+        mistakes = 0;
+        previousLength = 0;
         hideModal();
         setChromeOpacity(0.8);
         typingInput.focus();
@@ -219,11 +225,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = words.join(' ');
         const correctChars = renderProgress(typedWordsDiv, target, typed);
 
+        // COUNT EVERY NEW CHARACTER, SO MISTAKES FIXED WITH BACKSPACE STILL COUNT
+        for (let i = previousLength; i < typed.length; i++) {
+            keystrokes++;
+            if (typed[i] !== target[i]) {
+                mistakes++;
+            }
+        }
+        previousLength = typed.length;
+
         if (typed.length === target.length) {
-            const totalTime = (new Date() - startTime) / 1000;
-            const cpm = Math.round((typed.length / totalTime) * 60);
-            const wpm = Math.round((typed.split(' ').length / totalTime) * 60);
-            const accuracy = Math.round((correctChars / typed.length) * 100);
+            const minutes = (new Date() - startTime) / 60000;
+            const cpm = Math.round(correctChars / minutes);
+            const wpm = Math.round(correctChars / 5 / minutes);
+            const accuracy = Math.round(((keystrokes - mistakes) / keystrokes) * 100);
 
             document.getElementById('cpm').innerText = `CPM: ${cpm}`;
             document.getElementById('wpm').innerText = `WPM: ${wpm}`;
