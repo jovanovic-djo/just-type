@@ -24,7 +24,7 @@
         </div>
         <div id="theme-switch" class="theme-switch">
             <label class="switch">
-                <input type="checkbox" id="theme-toggle">
+                <input type="checkbox" id="theme-toggle" aria-label="Dark theme">
                 <span class="slider"></span>
             </label>
         </div>
@@ -32,7 +32,8 @@
     <h1>just.Type</h1>
     <form action="type.html" method="GET">
         <div class="wrapper-left">
-            <div class="choice language-choice" id="language-choice">
+            <fieldset class="choice language-choice" id="language-choice">
+                <legend class="visually-hidden">Language</legend>
                 <input type="radio" id="language-english" name="language" value="english" checked="checked" />
                 <label for="language-english">English</label>
 
@@ -50,20 +51,22 @@
 
                 <input type="radio" id="language-lorem" name="language" value="lorem" />
                 <label for="language-lorem">Lorem</label>
-            </div>
+            </fieldset>
         </div>
-        <div class="accent-choice" id="accent-choice">
+        <fieldset class="accent-choice" id="accent-choice">
+            <legend class="visually-hidden">Accents</legend>
             <div class="switch-wrap">
-                <input type="radio" id="accent-on" name="accent" value="on" checked="checked" />
+                <input type="radio" id="accent-on" name="accent" value="on" checked="checked" aria-label="Keep accents" />
                 <label for="accent-on">ČÜß</label>
             </div>
             <div class="switch-wrap">
-                <input type="radio" id="accent-off" name="accent" value="off"/>
+                <input type="radio" id="accent-off" name="accent" value="off" aria-label="Remove accents" />
                 <label for="accent-off">CUSS</label>  
             </div>
-        </div>
+        </fieldset>
         <div class="wrapper-right">
-            <div class="choice topic-choice" id="topic-choice">
+            <fieldset class="choice topic-choice" id="topic-choice">
+                <legend class="visually-hidden">Topic</legend>
                 <input type="radio" id="topic-none" name="topic" value="none" checked="checked" />
                 <label for="topic-none">None</label>
 
@@ -81,10 +84,11 @@
 
                 <input type="radio" id="topic-quotes" name="topic" value="quotes" />
                 <label for="topic-quotes">Quotes</label>                   
-            </div>
+            </fieldset>
         </div>
         <div class="wrapper-left">
-            <div class="choice complexity-choice" id="complexity-choice">
+            <fieldset class="choice complexity-choice" id="complexity-choice">
+                <legend class="visually-hidden">Difficulty</legend>
                 <input type="radio" id="complexity-low" name="complexity" value="low" checked="checked" />
                 <label for="complexity-low">Easy</label>
 
@@ -96,10 +100,11 @@
                 
                 <input type="radio" id="complexity-insane" name="complexity" value="insane"/>
                 <label for="complexity-insane">Insane</label>
-            </div>
+            </fieldset>
         </div>
         <div class="wrapper-right">
-            <div class="choice mode-value-choice" id="mode-value-choice">
+            <fieldset class="choice mode-value-choice" id="mode-value-choice">
+                <legend class="visually-hidden">Number of words</legend>
                 <input type="radio" id="mode-value-5" name="mode-value" value="5" checked="checked" />
                 <label for="mode-value-5">5</label>
 
@@ -111,16 +116,16 @@
 
                 <input type="radio" id="mode-value-30" name="mode-value" value="30" />
                 <label for="mode-value-30">30</label>
-            </div>  
+            </fieldset>  
         </div>          
         <div class="button-container">
             <button class="start-test" type="submit" id="start-test">START</button>
         </div>
     </form>
     <div class="instruction-container">
-        <item><key>tab</key> - restart test</item>
-        <item><key>esc</key> - back to home</item>
-        <item><key>~</key> - new test</item>
+        <span class="hint"><kbd>tab</kbd> - restart test</span>
+        <span class="hint"><kbd>esc</kbd> - back to home</span>
+        <span class="hint"><kbd>enter</kbd> - new test</span>
     </div>
     <script src="js/home.js" defer></script>
 </body>

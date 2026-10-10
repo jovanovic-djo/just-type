@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             e.preventDefault();
             window.location.href = './index.html';
-        } else if (e.key === '`' || e.key === '~') {
+        } else if (e.key === 'Enter') {
             e.preventDefault();
             window.location.reload();
         } else if (e.key === 'Tab') {

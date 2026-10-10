@@ -83,7 +83,7 @@ h1 {
     margin-bottom: 80px;
 }
 
-key {
+kbd {
     color: var(--background-color);
     background-color: var(--text-color);
     margin: 0;
@@ -93,7 +93,26 @@ key {
     line-height: .7rem;
 }
 
-item {
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-width: 0;
+}
+
+.hint {
     margin-left: 3%;
     margin-right: 3%;
     position: relative;
@@ -160,6 +179,11 @@ item {
     height: 0;
 }
 
+.switch input:focus-visible + .slider {
+    outline: 3px solid var(--text-color);
+    outline-offset: 3px;
+}
+
 .slider {
     position: absolute;
     top: 0;
@@ -215,8 +239,21 @@ form {
     justify-content: center;
 }
 
-.accent-choice input[type="radio"] {
-    display: none;
+.accent-choice input[type="radio"],
+.choice input[type="radio"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+input[type="radio"]:focus-visible + label {
+    outline: 3px solid var(--text-color);
+    outline-offset: 2px;
 }
 
 .accent-choice label:hover {
@@ -262,10 +299,6 @@ form {
     padding: 5px 10px;
     cursor: pointer;
     background-color: var(--default-button);
-}
-
-.choice input[type="radio"] {
-    display: none;
 }
 
 .choice label:hover {
@@ -412,7 +445,7 @@ input[type="radio"]:checked:disabled + label {
         font-size: 14px;
         padding: 8px 16px;
     }
-    key {
+    kbd {
         font-size: .6rem;
     }
     .modal-content {
