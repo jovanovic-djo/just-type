@@ -102,7 +102,15 @@
                 <label for="complexity-insane">Insane</label>
             </fieldset>
         </div>
-        <div class="wrapper-right">
+        <div class="wrapper-right mode-wrapper">
+            <fieldset class="choice mode-choice" id="mode-choice">
+                <legend class="visually-hidden">Mode</legend>
+                <input type="radio" id="mode-words" name="mode" value="words" checked="checked" />
+                <label for="mode-words">Words</label>
+
+                <input type="radio" id="mode-time" name="mode" value="time" />
+                <label for="mode-time">Time</label>
+            </fieldset>
             <fieldset class="choice mode-value-choice" id="mode-value-choice">
                 <legend class="visually-hidden">Number of words</legend>
                 <input type="radio" id="mode-value-5" name="mode-value" value="5" checked="checked" />
@@ -116,7 +124,21 @@
 
                 <input type="radio" id="mode-value-30" name="mode-value" value="30" />
                 <label for="mode-value-30">30</label>
-            </fieldset>  
+            </fieldset>
+            <fieldset class="choice time-value-choice" id="time-value-choice" hidden>
+                <legend class="visually-hidden">Seconds</legend>
+                <input type="radio" id="time-value-15" name="time-value" value="15" />
+                <label for="time-value-15">15s</label>
+
+                <input type="radio" id="time-value-30" name="time-value" value="30" checked="checked" />
+                <label for="time-value-30">30s</label>
+
+                <input type="radio" id="time-value-60" name="time-value" value="60" />
+                <label for="time-value-60">60s</label>
+
+                <input type="radio" id="time-value-120" name="time-value" value="120" />
+                <label for="time-value-120">120s</label>
+            </fieldset>
         </div>          
         <div class="button-container">
             <button class="start-test" type="submit" id="start-test">START</button>

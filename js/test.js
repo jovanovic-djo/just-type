@@ -93,12 +93,24 @@ let words = [];
 
 // DISPLAY WORDS IN ONE STRING
 function displayWords(words) {
-    document.getElementById('word-display').textContent = words.join(' ');
+    const display = document.getElementById('word-display');
+    display.textContent = words.join(' ');
+    display.scrollTop = 0;
+}
+
+
+// PICK count WORDS, RESHUFFLING THE LIST WHENEVER IT RUNS OUT
+function pickWords(list, count) {
+    const picked = [];
+    while (picked.length < count) {
+        picked.push(...shuffleArray([...list]));
+    }
+    return picked.slice(0, count);
 }
 
 
 // FETCH WORDS FUNCTION
-function fetchWords(language, accent, topic, complexity, modeValue) {
+function fetchWords(language, accent, topic, complexity, wordCount) {
     const filePath = selectFilePath(language, topic, complexity);
 
     fetch(filePath)
@@ -113,12 +125,7 @@ function fetchWords(language, accent, topic, complexity, modeValue) {
             if (words.length === 0) {
                 throw new Error('word list is empty');
             }
-            words = shuffleArray(words);
-            if (topic === "quotes") {
-                words = words.slice(0, 1);
-            } else {
-                words = words.slice(0, modeValue);
-            }
+            words = pickWords(words, topic === "quotes" ? 1 : wordCount);
             words = accentTrim(accent, words, language);
             displayWords(words);
         })
@@ -180,6 +187,18 @@ function lockedLength(typed, target) {
 }
 
 
+// IN TIMED MODE ONLY A FEW LINES ARE SHOWN: SCROLL SO THE CURRENT LINE IS THE SECOND ONE
+function scrollToCurrentLine(display) {
+    const next = display.querySelector('.next-char');
+    if (!next) {
+        return;
+    }
+    const lineHeight = parseFloat(getComputedStyle(display).lineHeight);
+    const line = Math.floor(next.offsetTop / lineHeight);
+    display.scrollTop = Math.max(0, line - 1) * lineHeight;
+}
+
+
 // KEYS THAT WOULD MOVE THE CARET INSIDE THE TYPED TEXT
 const caretKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End', 'PageUp', 'PageDown'];
 
@@ -190,18 +209,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const accent = getQueryParam('accent');
     const topic = getQueryParam('topic');
     const complexity = getQueryParam('complexity');
+    const timed = getQueryParam('mode') === 'time' && topic !== 'quotes';
+    const seconds = parseInt(getQueryParam('time-value'), 10) || 30;
     const modeValue = parseInt(getQueryParam('mode-value'), 10);
 
-    fetchWords(language, accent, topic, complexity, modeValue);
+    // IN TIMED MODE LOAD MORE WORDS THAN ANYONE CAN TYPE (4 WORDS PER SECOND = 240 WPM)
+    fetchWords(language, accent, topic, complexity, timed ? seconds * 4 : modeValue);
 
     const typingInput = document.getElementById('typing-input');
     const typedWordsDiv = document.getElementById('word-display');
     const resultModal = document.getElementById('result-modal');
     const testTitle = document.getElementById('test-title');
     const instructions = document.getElementById('instruction-container');
+    const timer = document.getElementById('timer');
 
     let startTime = null;
-    let isModalVisible = false;
+    let finished = false;
+    let timerInterval = null;
+    let correctChars = 0;
     let keystrokes = 0;
     let mistakes = 0;
     let previousValue = "";
@@ -213,8 +238,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const hideModal = () => {
         resultModal.style.display = 'none';
-        isModalVisible = false;
     };
+
+    const showResults = (elapsed) => {
+        finished = true;
+        clearInterval(timerInterval);
+
+        const minutes = elapsed / 60000;
+        const cpm = Math.round(correctChars / minutes);
+        const wpm = Math.round(correctChars / 5 / minutes);
+        const accuracy = Math.round(((keystrokes - mistakes) / keystrokes) * 100);
+
+        document.getElementById('cpm').innerText = `CPM: ${cpm}`;
+        document.getElementById('wpm').innerText = `WPM: ${wpm}`;
+        document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
+
+        resultModal.style.display = "block";
+    };
+
+    // COUNT DOWN FROM THE FIRST KEYSTROKE AND END THE TEST AT ZERO
+    const startTimer = () => {
+        timerInterval = setInterval(() => {
+            const remaining = seconds - (new Date() - startTime) / 1000;
+            timer.textContent = Math.max(0, Math.ceil(remaining));
+            if (remaining <= 0) {
+                showResults(seconds * 1000);
+            }
+        }, 100);
+    };
+
+    if (timed) {
+        typedWordsDiv.classList.add('timed');
+        timer.hidden = false;
+        timer.textContent = seconds;
+    }
 
     const restartTest = () => {
         if (words.length === 0) {
@@ -223,6 +280,10 @@ document.addEventListener('DOMContentLoaded', () => {
         typingInput.value = "";
         displayWords(words);
         startTime = null;
+        finished = false;
+        clearInterval(timerInterval);
+        timer.textContent = seconds;
+        correctChars = 0;
         keystrokes = 0;
         mistakes = 0;
         previousValue = "";
@@ -249,12 +310,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     typingInput.addEventListener('input', () => {
-        if (isModalVisible || words.length === 0) {
+        if (finished || words.length === 0) {
+            typingInput.value = previousValue;
             return;
         }
 
         if (startTime === null) {
             startTime = new Date();
+            if (timed) {
+                startTimer();
+            }
         }
 
         testTitle.style.transition = "opacity 0.7s ease-in-out";
@@ -271,7 +336,10 @@ document.addEventListener('DOMContentLoaded', () => {
             typingInput.value = typed;
         }
 
-        const correctChars = renderProgress(typedWordsDiv, target, typed);
+        correctChars = renderProgress(typedWordsDiv, target, typed);
+        if (timed) {
+            scrollToCurrentLine(typedWordsDiv);
+        }
 
         // COUNT EVERY NEW CHARACTER, SO MISTAKES FIXED WITH BACKSPACE STILL COUNT
         for (let i = previousValue.length; i < typed.length; i++) {
@@ -283,17 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         previousValue = typed;
 
         if (typed.length === target.length) {
-            const minutes = (new Date() - startTime) / 60000;
-            const cpm = Math.round(correctChars / minutes);
-            const wpm = Math.round(correctChars / 5 / minutes);
-            const accuracy = Math.round(((keystrokes - mistakes) / keystrokes) * 100);
-
-            document.getElementById('cpm').innerText = `CPM: ${cpm}`;
-            document.getElementById('wpm').innerText = `WPM: ${wpm}`;
-            document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
-
-            resultModal.style.display = "block";
-            isModalVisible = true;
+            showResults(new Date() - startTime);
         }
     });
 

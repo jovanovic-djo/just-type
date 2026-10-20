@@ -209,6 +209,17 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 /*HOME PAGE*/
+.mode-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.mode-choice {
+    padding-right: 8px;
+    margin-right: 8px;
+    border-right: 3px solid var(--border-color);
+}
+
 form {
     width: 100%;
     margin-top: 5px;
@@ -393,6 +404,20 @@ input[type="radio"]:checked:disabled + label {
     margin-top: 30px;
     overflow: hidden;
     padding: 5px;
+}
+
+#word-display.timed {
+    position: relative;
+    line-height: 1.5;
+    max-height: 4.5em;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.timer {
+    font-size: var(--font-size-medium);
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 #type-area {
