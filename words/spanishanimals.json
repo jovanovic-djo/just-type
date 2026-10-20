@@ -14,7 +14,7 @@
         "cocodrilo",
         "conejo",
         "castor",
-        "pollo",
+        "gallina",
         "paloma",
         "cuervo",
         "pez",
@@ -66,11 +66,11 @@
         "jabalí",
         "rata",
         "serpiente",
-        "pavo real",
+        "pavorreal",
         "loro",
         "gaviota",
-        "pájaro carpintero",
-        "acuario",
+        "picamaderos",
+        "guepardo",
         "colibrí",
         "cigüeña",
         "pavo",
@@ -95,6 +95,10 @@
         "morsa",
         "mosca",
         "caracol",
-        "ciempiés"
+        "ciempiés",
+        "alce",
+        "flamenco",
+        "pelícano",
+        "pantera"
     ]
     }
