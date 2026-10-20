@@ -1,0 +1,25 @@
+name: Word lists
+
+on:
+  push:
+    paths:
+      - 'words/**'
+      - 'index.html'
+      - 'js/test.js'
+      - 'tools/check_words.py'
+      - '.github/workflows/word-lists.yml'
+  pull_request:
+    paths:
+      - 'words/**'
+      - 'index.html'
+      - 'js/test.js'
+      - 'tools/check_words.py'
+      - '.github/workflows/word-lists.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check word lists
+        run: python3 tools/check_words.py
