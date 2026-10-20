@@ -388,11 +388,15 @@ input[type="radio"]:checked:disabled + label {
     opacity: 0.8;
 }
 
-#result-text {
+.result-text {
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: var(--text-color);
+}
+
+.result-details {
+    margin-top: 10px;
 }
 
 #typing-input {
@@ -477,7 +481,7 @@ input[type="radio"]:checked:disabled + label {
         width: 70%;
         font-size: 12px;
     }
-    #result-text span {
+    .result-text span {
         font-size: 15px;
     }
 }
@@ -501,7 +505,7 @@ input[type="radio"]:checked:disabled + label {
     .modal-content {
         width: 60%;
     }
-    #result-text span {
+    .result-text span {
         font-size: 18px;
     }
 }
@@ -528,7 +532,7 @@ input[type="radio"]:checked:disabled + label {
     .modal-content {
         width: 50%;
     }
-    #result-text span {
+    .result-text span {
         font-size: 20px;
     }
 }
@@ -555,7 +559,7 @@ input[type="radio"]:checked:disabled + label {
     .modal-content {
         width: 40%;
     }
-    #result-text span {
+    .result-text span {
         font-size: var(--font-size-medium);
     } 
 }

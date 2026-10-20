@@ -252,6 +252,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('cpm').innerText = `CPM: ${cpm}`;
         document.getElementById('wpm').innerText = `WPM: ${wpm}`;
         document.getElementById('accuracy').innerText = `Accuracy: ${accuracy}%`;
+        document.getElementById('time').innerText = `Time: ${(elapsed / 1000).toFixed(1)}s`;
+        document.getElementById('mistakes').innerText = `Mistakes: ${mistakes}`;
 
         resultModal.style.display = "block";
     };
