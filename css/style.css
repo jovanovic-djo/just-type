@@ -401,13 +401,24 @@ input[type="radio"]:checked:disabled + label {
 
 #typing-input {
     opacity: 0;
+    /* iOS zooms in on inputs under 16px when they get focus */
+    font-size: 16px;
 }
 
 #word-display {
     font-size: 48px;
     margin-top: 30px;
     overflow: hidden;
+    overflow-wrap: anywhere;
     padding: 5px;
+}
+
+#word-display.complexity-high {
+    font-size: 38px;
+}
+
+#word-display.complexity-insane {
+    font-size: 32px;
 }
 
 #word-display.timed {
@@ -459,6 +470,19 @@ input[type="radio"]:checked:disabled + label {
 /*MEDIA QUERIES*/
 /* Small devices*/
 @media (max-width: 650px) {
+    .header {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    #word-display {
+        font-size: 30px;
+    }
+    #word-display.complexity-high {
+        font-size: 26px;
+    }
+    #word-display.complexity-insane {
+        font-size: 22px;
+    }
     .accent-choice label,
     .accent-choice input {
         width: 30px;

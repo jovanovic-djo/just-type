@@ -378,9 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const wordDisplay = document.getElementById('word-display');
     const complexity = getQueryParam('complexity');
 
-    if (complexity === 'insane') {
-        wordDisplay.style.fontSize = '32px';
-    } else if (complexity === 'high') {
-        wordDisplay.style.fontSize = '38px';
+    // SIZES ARE IN css/style.css, SO SMALL SCREENS CAN USE SMALLER ONES
+    if (complexity === 'insane' || complexity === 'high') {
+        wordDisplay.classList.add(`complexity-${complexity}`);
     }
 });
