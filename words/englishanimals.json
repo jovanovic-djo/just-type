@@ -70,7 +70,6 @@
         "parrot",
         "seagull",
         "woodpecker",
-        "aquarius",
         "hummingbird",
         "stork",
         "turkey",
@@ -95,6 +94,12 @@
         "walrus",
         "fly",
         "snail",
-        "centipede"
+        "centipede",
+        "cheetah",
+        "moose",
+        "flamingo",
+        "pelican",
+        "panther",
+        "raven"
     ]
 }
