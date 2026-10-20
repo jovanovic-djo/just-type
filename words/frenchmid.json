@@ -4,7 +4,6 @@
       "français",
       "beaucoup",
       "toujours",
-      "souvent",
       "seulement",
       "travail",
       "famille",
@@ -15,11 +14,9 @@
       "possible",
       "quelque",
       "ensemble",
-      "bientôt",
       "revenir",
       "dernier",
       "nouveau",
-      "pouvoir",
       "chercher",
       "arriver",
       "difficile",
@@ -98,7 +95,19 @@
       "travailler",
       "tristesse",
       "vérifier",
-      "voyager"
+      "voyager",
+      "voiture",
+      "cuisine",
+      "semaine",
+      "journée",
+      "histoire",
+      "quartier",
+      "vacances",
+      "musique",
+      "écouter",
+      "attendre",
+      "ouvrir",
+      "fenêtre"
     ]
   }
   

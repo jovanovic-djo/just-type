@@ -68,7 +68,6 @@
         "perroquet",
         "mouette",
         "pic",
-        "verseau",
         "colibri",
         "cigogne",
         "dinde",
@@ -92,6 +91,15 @@
         "phoque",
         "morse",
         "mouche",
-        "escargot"
+        "escargot",
+        "guépard",
+        "élan",
+        "flamant",
+        "pélican",
+        "panthère",
+        "chouette",
+        "crapaud",
+        "marmotte",
+        "pie"
     ]
 }
