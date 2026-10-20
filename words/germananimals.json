@@ -70,7 +70,7 @@
         "papagei",
         "möwe",
         "specht",
-        "wassermann",
+        "eisvogel",
         "kolibri",
         "storch",
         "truthahn",
@@ -95,6 +95,11 @@
         "walross",
         "fliege",
         "schnecke",
-        "tausendfüßler"
+        "tausendfüßler",
+        "gepard",
+        "elch",
+        "flamingo",
+        "pelikan",
+        "panther"
     ]
 }
