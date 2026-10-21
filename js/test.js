@@ -244,10 +244,11 @@ document.addEventListener('DOMContentLoaded', () => {
         finished = true;
         clearInterval(timerInterval);
 
+        // NO TIME OR NO KEYSTROKES WOULD DIVIDE BY ZERO
         const minutes = elapsed / 60000;
-        const cpm = Math.round(correctChars / minutes);
-        const wpm = Math.round(correctChars / 5 / minutes);
-        const accuracy = Math.round(((keystrokes - mistakes) / keystrokes) * 100);
+        const cpm = minutes > 0 ? Math.round(correctChars / minutes) : 0;
+        const wpm = minutes > 0 ? Math.round(correctChars / 5 / minutes) : 0;
+        const accuracy = keystrokes > 0 ? Math.round(((keystrokes - mistakes) / keystrokes) * 100) : 0;
 
         document.getElementById('cpm').innerText = `CPM: ${cpm}`;
         document.getElementById('wpm').innerText = `WPM: ${wpm}`;
@@ -322,6 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         }
         typingInput.focus();
+    });
+
+    // THE TEXT HAS TO BE TYPED, NOT PASTED OR DROPPED IN
+    typingInput.addEventListener('paste', (e) => e.preventDefault());
+    typingInput.addEventListener('beforeinput', (e) => {
+        if (e.inputType === 'insertFromPaste' || e.inputType === 'insertFromDrop') {
+            e.preventDefault();
+        }
     });
 
     typingInput.addEventListener('input', () => {
