@@ -294,13 +294,26 @@ document.addEventListener('DOMContentLoaded', () => {
         typingInput.focus();
     };
 
+    const goHome = () => {
+        window.location.href = './index.html';
+    };
+
+    const newTest = () => {
+        window.location.reload();
+    };
+
+    // PHONE KEYBOARDS HAVE NO TAB OR ESC, SO THE RESULTS ALSO HAVE BUTTONS
+    document.getElementById('restart-button').addEventListener('click', restartTest);
+    document.getElementById('new-test-button').addEventListener('click', newTest);
+    document.getElementById('home-button').addEventListener('click', goHome);
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             e.preventDefault();
-            window.location.href = './index.html';
+            goHome();
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            window.location.reload();
+            newTest();
         } else if (e.key === 'Tab') {
             e.preventDefault();
             restartTest();
