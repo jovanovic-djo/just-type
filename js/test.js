@@ -314,7 +314,11 @@ document.addEventListener('DOMContentLoaded', () => {
             goHome();
         } else if (e.key === 'Enter') {
             e.preventDefault();
-            newTest();
+            // NOT WHILE TYPING: THE ENTER KEY ON A PHONE KEYBOARD IS EASY TO HIT BY MISTAKE
+            const typing = startTime !== null && !finished;
+            if (!typing) {
+                newTest();
+            }
         } else if (e.key === 'Tab') {
             e.preventDefault();
             restartTest();

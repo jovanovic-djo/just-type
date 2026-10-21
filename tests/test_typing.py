@@ -103,6 +103,12 @@ def buttons(report, chrome, base, device):
     report.section(f'results buttons, {device}')
     press = chrome.tap if device == 'phone' else chrome.click
     chrome.goto(base + WORDS)
+    if device == 'phone':
+        chrome.type(words(chrome)[:2])
+        chrome.mark()
+        chrome.key('Enter')
+        report.check("the keyboard's enter key mid-test does nothing", same_page(chrome), True)
+        chrome.key('Tab')
     first = finish(chrome, typo=True)
     report.check('results shown at the end', modal(chrome), 'block')
     report.check('a typo fixed with backspace still counts', result(chrome, 'mistakes'), 'Mistakes: 1')
@@ -189,6 +195,44 @@ def hotkeys(report, chrome, base):
     report.check('esc on the results goes home', chrome.js("location.pathname.endsWith('/index.html')"), True)
 
 
+def same_page(chrome):
+    """After mark(): wait a moment and say whether the page is still the same document."""
+    time.sleep(0.7)
+    return chrome.js(f'window.__tag === {json.dumps(chrome.tag)}')
+
+
+def enter(report, chrome, base):
+    report.section('enter')
+    chrome.goto(base + WORDS)
+    chrome.mark()
+    chrome.key('Enter')
+    chrome.loaded('type.html')
+    report.check('before typing: enter gives new words', True, True)
+
+    text = words(chrome)
+    chrome.type(text[:3])
+    chrome.mark()
+    chrome.key('Enter')
+    report.check('while typing: enter does nothing', [same_page(chrome), value(chrome)], [True, text[:3]])
+    chrome.type(text[3:])
+    chrome.wait("document.getElementById('result-modal').style.display === 'block'")
+    report.check('while typing: the test can still be finished', modal(chrome), 'block')
+
+    chrome.key('Tab')
+    chrome.mark()
+    chrome.key('Enter')
+    chrome.loaded('type.html')
+    report.check('after tab restarts: enter gives new words again', True, True)
+
+    chrome.goto(base + TIMED)
+    chrome.type(words(chrome)[:3])
+    chrome.mark()
+    chrome.key('Enter')
+    report.check('time mode while typing: enter does nothing', same_page(chrome), True)
+    time.sleep(1.5)
+    report.check('time mode while typing: the timer keeps running', timer(chrome) in ('14', '13'), True)
+
+
 def timed(report, chrome, base):
     report.section('time mode')
     chrome.goto(base + TIMED)
@@ -212,6 +256,11 @@ def timed(report, chrome, base):
     time.sleep(2.2)
     report.check('restart: the countdown runs again', timer(chrome), '13')
     report.check('restart: the words start at the top', chrome.js("document.getElementById('word-display').scrollTop"), 0)
+    chrome.wait("document.getElementById('result-modal').style.display === 'block'", timeout=20)
+    chrome.mark()
+    chrome.key('Enter')
+    chrome.loaded('type.html')
+    report.check('time up: enter starts a new test', modal(chrome), '')
 
 
 def run(report, base):
@@ -220,6 +269,7 @@ def run(report, base):
         pasting(report, chrome, base)
         buttons(report, chrome, base, 'desktop')
         hotkeys(report, chrome, base)
+        enter(report, chrome, base)
         timed(report, chrome, base)
     with Chrome() as chrome:
         chrome.screen(390, 844, phone=True)
