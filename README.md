@@ -38,3 +38,13 @@ python tools/check_words.py
 ```
 
 The same check runs on GitHub for every push and pull request that changes the word lists.
+
+## Tests
+The site is tested in headless Chrome: every option combination on the home page, the keyboard, the back button, typing, word locking, pasting, the results and their buttons, and the timer. Run them with:
+
+```
+pip install websocket-client
+python tests/run.py
+```
+
+They also run on GitHub for every push and pull request.
