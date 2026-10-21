@@ -26,6 +26,18 @@ const hiddenWhen = {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.querySelector('form');
 
+    // COMING BACK TO THIS PAGE, PUT BACK THE OPTIONS THAT WERE CHOSEN. THE BROWSER'S OWN
+    // RESTORE (TURNED OFF WITH autocomplete="off") RAN AFTER THIS SCRIPT AND SKIPPED
+    // DISABLED OPTIONS, SO IT LEFT THE PAGE HALF RESTORED
+    const saved = history.state && history.state.selection;
+    if (saved) {
+        for (const [name, value] of Object.entries(saved)) {
+            if (form.elements[name]) {
+                form.elements[name].value = value;
+            }
+        }
+    }
+
     function handleRadioChange() {
         const selection = {
             language: form.elements['language'].value,
@@ -42,6 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (const [groupId, isHidden] of Object.entries(hiddenWhen)) {
             document.getElementById(groupId).hidden = isHidden(selection);
+        }
+
+        // REMEMBER EVERY CHOICE, ALSO THE DISABLED ONES, IN THIS PAGE'S HISTORY ENTRY
+        // (BROWSERS LIMIT HOW OFTEN THIS CAN BE CALLED, SAFARI THROWS AN ERROR PAST THE LIMIT)
+        const chosen = [...form.querySelectorAll('input[type="radio"]:checked')];
+        try {
+            history.replaceState({ selection: Object.fromEntries(chosen.map(radio => [radio.name, radio.value])) }, '');
+        } catch (error) {
+            console.warn("Couldn't remember the options:", error);
         }
     }
 
