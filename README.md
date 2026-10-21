@@ -18,11 +18,15 @@ Try it at **https://jovanovic-djo.github.io/just-type/**
 
 ## Design
 ##### Minimalist design
-![image](https://github.com/user-attachments/assets/7210c4fe-daf3-4d58-b749-e59eab242418)
+![Home page with the options](img/readme/home.png)
 ##### Intuitive test
-![image](https://github.com/user-attachments/assets/f19d82f7-c2e7-499e-80c8-bfd3ebdc3f7d)
+![A test being typed, with a mistake marked](img/readme/test.png)
 ##### Result display
-![image](https://github.com/user-attachments/assets/a7e1f52d-ad42-455d-839b-0255b439fd44)
+![Results with speed, accuracy, time, mistakes and buttons](img/readme/results.png)
+##### Time mode, in the dark theme
+![A 60 second test in the dark theme](img/readme/time-dark.png)
+##### On a phone
+<img src="img/readme/phone-dark.png" alt="Results on a phone" width="300">
 
 ## Word lists
 The words live in `words/`, one JSON file per language and difficulty or topic, e.g. `words/germanlow.json`:
