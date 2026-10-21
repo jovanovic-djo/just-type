@@ -339,7 +339,8 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (startTime === null) {
+        const firstInput = startTime === null;
+        if (firstInput) {
             startTime = new Date();
             if (timed) {
                 startTimer();
@@ -375,7 +376,8 @@ document.addEventListener('DOMContentLoaded', () => {
         previousValue = typed;
 
         if (typed.length === target.length) {
-            showResults(new Date() - startTime);
+            // THE WHOLE TEXT CAME IN ONE INPUT, SO NO TYPING TIME CAN BE MEASURED
+            showResults(firstInput ? 0 : new Date() - startTime);
         }
     });
 
